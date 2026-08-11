@@ -3,10 +3,10 @@
 #include <Render/Renderer.h>
 namespace Craft
 {
-	Actor::Actor(
-		const std::string& image,
-		const Vector2& position,
-		Color color) : image(image), position(position), color(color), width(static_cast<int>(image.length()))
+    Actor::Actor(
+        const std::string& image,
+        const Vector2& position,
+        Color color) : image(image), position(position), color(color), width(static_cast<int>(image.length()))
 	{
 
 	}

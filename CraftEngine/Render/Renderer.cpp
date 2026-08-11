@@ -130,7 +130,8 @@ namespace Craft
 			}
 
 			// y 위치가 화면을 벗어났으면 건너뛰기
-			if (command.position.y < 0 || command.position.y >= screenSize.y)
+			//Todo: 이 렌더러는 여러 줄(height > 1) 이미지를 지원하지 않는다. 나중에 액터가 height > 1이 될 것이므로 수정해야 함
+            if (command.position.y < 0 || command.position.y >= screenSize.y)
 			{
 				continue;
 			}

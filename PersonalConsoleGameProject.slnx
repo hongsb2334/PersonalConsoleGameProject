@@ -8,4 +8,5 @@
     <BuildDependency Project="CraftEngine/CraftEngine.vcxproj" />
   </Project>
   <Project Path="ShootingGame/ShootingGame.vcxproj" Id="19bc5a41-ac90-4081-895e-76fcadcc8661" />
+  <Project Path="Tears/Tears.vcxproj" Id="27131e85-6a31-4bee-820f-2d48a639d37e" />
 </Solution>

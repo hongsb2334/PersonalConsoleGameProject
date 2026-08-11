@@ -63,6 +63,9 @@ namespace Craft
         //문자열 너비 반환 함수
         inline int GetWidth() const { return width; }
 
+        //문자열 높이 반환 함수
+        inline int GetHeight() const { return height; }
+
         //액터의 이미지 설정 함수
         inline void ChangeImage(const std::string& newImage)
         {
@@ -96,6 +99,9 @@ namespace Craft
 
 		//글자 길이
 		int width = 0;
+
+        //글자 높이
+        int height = 1;
 
 		//렌더링 순서
 		int sortingOrder = 0;
