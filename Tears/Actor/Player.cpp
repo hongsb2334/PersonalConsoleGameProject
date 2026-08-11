@@ -2,6 +2,9 @@
 #include <Engine/Engine.h>
 #include <Input/Input.h>
 #include <Level/Level.h>
+#include <Actor/PlayerProjectile.h>
+#include <cmath>
+
 
 using namespace Craft;
 
@@ -60,36 +63,36 @@ void Player::Tick(float deltaTime)
     ////발사 타이머 업데이트
     //timer.Tick(deltaTime);
 
-    //if (fireMode == FireMode::OneShot)
-    //{
-    //    //탄약 발사 처리
-    //    if (Input::Get().GetKeydown(VK_SPACE))
-    //    {
-    //        Fire();
-    //    }
-    //}
-    ////연사 모드 처리
-    //else if (fireMode == FireMode::Repeat)
-    //{
-    //    if (Input::Get().GetKey(VK_SPACE))
-    //    {
-    //        //연사 발사 함수 호출
-    //        FireInterval();
-    //    }
-    //}
+    if (fireMode == FireMode::OneShot)
+    {
+        //탄약 발사 처리
+        if (Input::Get().GetKeydown(VK_SPACE))
+        {
+            Fire();
+        }
+    }
+    //연사 모드 처리
+    else if (fireMode == FireMode::Repeat)
+    {
+        if (Input::Get().GetKey(VK_SPACE))
+        {
+            //연사 발사 함수 호출
+            FireInterval();
+        }
+    }
 
-    ////발사 모드 전환 처리
-    //if (Input::Get().GetKeydown('R'))
-    //{
-    //    if (fireMode == FireMode::OneShot)
-    //    {
-    //        fireMode = FireMode::Repeat;
-    //    }
-    //    else if (fireMode == FireMode::Repeat)
-    //    {
-    //        fireMode = FireMode::OneShot;
-    //    }
-    //}
+    //발사 모드 전환 처리
+    if (Input::Get().GetKeydown('R'))
+    {
+        if (fireMode == FireMode::OneShot)
+        {
+            fireMode = FireMode::Repeat;
+        }
+        else if (fireMode == FireMode::Repeat)
+        {
+            fireMode = FireMode::OneShot;
+        }
+    }
 
 
 
@@ -121,6 +124,15 @@ void Player::OnCollision(const std::shared_ptr<Actor>& other)
 
 void Player::Move(float xDirection, float yDirection,float deltaTime)
 {
+    //대각 입력시 벡터 크기가 루트2가 되어 속도가 빨라지는 현상을 정규화로 해결
+    //Todo: 대각 입력시 약간 잔상이 남는 현상(Render 문제인지 확인해야함)
+    float length = std::sqrt(xDirection * xDirection + yDirection * yDirection);
+    if (length > 0.0f)
+    {
+        xDirection /= length;
+        yDirection /= length;
+    }
+
     //x위치 업데이트
     //이동 처리->이동 방향과 빠르기를 적용해서 새로운 위치를 구하는 것
     //이동 방향(direction) / 빠르기(moveSpeed) / 시간
@@ -162,35 +174,35 @@ void Player::Move(float xDirection, float yDirection,float deltaTime)
     SetPosition(newPosition);
 }
 
-//void Player::Fire()
-//{
-//    //탄약 생성 위치 구하기
-//    //플레이어의 가운데 위치
-//
-//    Vector2 bulletPosition(GetPosition().x + (width / 2), GetPosition().y); // <=A=> 가 있으면 <가 GetPosition.x 위치고 width / 2 한걸 더하면 A가 가운데가 된다.
-//
-//    //탄약 생성
-//    std::shared_ptr<Level> owner = GetOwner();
-//    if (owner)
-//    {
-//        owner->SpawnActor<PlayerBullet>(bulletPosition);
-//    }
-//}
+void Player::Fire()
+{
+    //탄약 생성 위치 구하기
+    //플레이어의 가운데 위치
 
-//void Player::FireInterval()
-//{
-//    //발사 가능 여부 확인
-//    if (!CanShoot())
-//    {
-//        return;
-//    }
-//
-//    //발사 처리
-//    Fire();
-//
-//    //경과 시간 초기화
-//    timer.Reset();
-//}
+    Vector2 bulletPosition(GetPosition().x + (width / 2), GetPosition().y); // <=A=> 가 있으면 <가 GetPosition.x 위치고 width / 2 한걸 더하면 A가 가운데가 된다.
+
+    //탄약 생성
+    std::shared_ptr<Level> owner = GetOwner();
+    if (owner)
+    {
+        owner->SpawnActor<PlayerProjectile>(bulletPosition);
+    }
+}
+
+void Player::FireInterval()
+{
+    //발사 가능 여부 확인
+    if (!CanShoot())
+    {
+        return;
+    }
+
+    //발사 처리
+    Fire();
+
+    //경과 시간 초기화
+    timer.Reset();
+}
 
 
 

@@ -17,6 +17,7 @@ class Player : public Craft::Actor
 
 public:
     Player();
+
 private:
     // 이벤트 함수 오버라이드
     virtual void Tick(float deltaTime) override;
@@ -44,7 +45,7 @@ private:
     float yPosition = 0.0f;
 
     //이동 속도 변수
-    float moveSpeed = 70.0f;
+    float moveSpeed = 40.0f;
 
     //발사 모드 추가
     FireMode fireMode = FireMode::None;
@@ -53,6 +54,14 @@ private:
     Timer timer;
 
     //연사 시 발사 간격(단위: 초)
-    float fireInterval = 0.1f;
+    float fireInterval = 0.3f;
+
+    //시작 체력
+    int hp = 3;
+    
+    //최대 체력
+    int maxHp = 3;
+
+    
 
 };

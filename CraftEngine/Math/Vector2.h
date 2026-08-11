@@ -36,8 +36,7 @@ namespace Craft
 		static Vector2 Right;
 		static Vector2 Up;
 
-
-	public:
+    public:
 		//좌표계 값으로 사용하기 위한 변수
 		int x = 0;
 		int y = 0;
