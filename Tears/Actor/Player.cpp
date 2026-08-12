@@ -63,6 +63,8 @@ void Player::Tick(float deltaTime)
     ////발사 타이머 업데이트
     //timer.Tick(deltaTime);
 
+    
+
     if (fireMode == FireMode::OneShot)
     {
         //탄약 발사 처리

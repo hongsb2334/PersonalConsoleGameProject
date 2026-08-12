@@ -17,6 +17,14 @@ private:
     float moveSpeed = 30.0f;
 
     //위치 갱신을 할 때 사용할 변수
+
+    float xPosition = 0.0f;
     float yPosition = 0.0f;
+
+    //발사체 이동 방향
+    float xDirection = 0.0f;
+    float yDirection = 0.0f;
+
+   
 };
 

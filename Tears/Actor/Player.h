@@ -45,7 +45,7 @@ private:
     float yPosition = 0.0f;
 
     //이동 속도 변수
-    float moveSpeed = 40.0f;
+    float moveSpeed = 70.0f;
 
     //발사 모드 추가
     FireMode fireMode = FireMode::None;
