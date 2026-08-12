@@ -1,9 +1,10 @@
 ﻿#pragma once
-#include <Actor/Actor.h>
+#include <Actor/Damageable.h>
 #include <Util/Timer.h>
 
-// 좌우로 이동/스페이스 키로 탄약을 발사하는 플레이어
-class Player : public Craft::Actor
+// wasd 이동/스페이스 키로 탄약을 발사하는 플레이어
+//Player는 액터를 상속하는 Damageable을 상속한다.
+class Player : public Craft::Damageable
 {
     //발사 모드 (단발/연발)
     enum class FireMode
@@ -13,17 +14,19 @@ class Player : public Craft::Actor
         Repeat
     };
     //커스텀 타입 등록
-    TYPE_DECLARATIONS(Player, Actor)
+    TYPE_DECLARATIONS(Player, Damageable)
 
 public:
     Player();
 
 private:
+    virtual void OnDeath() override;
+
     // 이벤트 함수 오버라이드
     virtual void Tick(float deltaTime) override;
 
-    //충돌 이벤트 함수 오버라이드
-    virtual void OnCollision(const std::shared_ptr<Actor>& other) override;
+    ////충돌 이벤트 함수 오버라이드
+    //virtual void OnCollision(const std::shared_ptr<Actor>& other) override;
 
     //이동 처리 함수
     void Move(float xDirection, float yDirection, float deltaTime);
@@ -55,12 +58,6 @@ private:
 
     //연사 시 발사 간격(단위: 초)
     float fireInterval = 0.3f;
-
-    //시작 체력
-    int hp = 3;
-    
-    //최대 체력
-    int maxHp = 3;
 
     
 

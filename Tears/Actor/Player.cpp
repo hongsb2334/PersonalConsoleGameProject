@@ -8,7 +8,8 @@
 
 using namespace Craft;
 
-Player::Player() : Actor("ISSAC", Vector2::Zero, Color::Green), fireMode(FireMode::OneShot)
+
+Player::Player() : Damageable("ISSAC", Vector2::Zero, Color::Green, 10), fireMode(FireMode::OneShot)
 {
     //생성 위치 설정
     int x = (Engine::Get().GetWidth() / 2) - (width / 2);
@@ -22,6 +23,12 @@ Player::Player() : Actor("ISSAC", Vector2::Zero, Color::Green), fireMode(FireMod
     //연사 타이머 시간 설정
     timer.SetTargetTime(fireInterval);
 
+}
+//죽음 함수 오버라이드
+void Player::OnDeath()
+{
+    super::OnDeath();
+    QuitGame();
 }
 // 이벤트 함수 오버라이드
 
@@ -38,21 +45,21 @@ void Player::Tick(float deltaTime)
     //방향키 입력에 따른 이동 방향 설정
     //오른쪽 방향 : 1, 왼쪽 방향 : -1.
     float xDirection = 0.0f;
-    if (Input::Get().GetKey(VK_RIGHT))
+    if (Input::Get().GetKey('D'))
     {
         xDirection = 1.0f;
     }
-    if (Input::Get().GetKey(VK_LEFT))
+    if (Input::Get().GetKey('A'))
     {
         xDirection = -1.0f;
     }
 
     float yDirection = 0.0f;
-    if (Input::Get().GetKey(VK_DOWN))
+    if (Input::Get().GetKey('S'))
     {
         yDirection = 1.0f;
     }
-    if (Input::Get().GetKey(VK_UP))
+    if (Input::Get().GetKey('W'))
     {
         yDirection = -1.0f;
     }
@@ -100,28 +107,28 @@ void Player::Tick(float deltaTime)
 
 }
 
-void Player::OnCollision(const std::shared_ptr<Actor>& other)
-{
-    super::OnCollision(other);
-
-    ////부딪힌 액터가 적 탄약이면 처리
-    //if (other->IsTypeOf<EnemyBullet>())
-    //{
-    //    //플레이어 제거
-    //    Destroy();
-
-    //    //적 탄약 제거
-    //    other->Destroy();
-
-    //    //파괴 이펙트 생성
-    //    if (GetOwner())
-    //    {
-    //        GetOwner()->SpawnActor<DestroyEffect>(GetPosition());
-    //        //게임 오버(게임 종료)
-    //        QuitGame();
-    //    }
-    //}
-}
+//void Player::OnCollision(const std::shared_ptr<Actor>& other)
+//{
+//    super::OnCollision(other);
+//
+//    ////부딪힌 액터가 적 탄약이면 처리
+//    //if (other->IsTypeOf<EnemyBullet>())
+//    //{
+//    //    //플레이어 제거
+//    //    Destroy();
+//
+//    //    //적 탄약 제거
+//    //    other->Destroy();
+//
+//    //    //파괴 이펙트 생성
+//    //    if (GetOwner())
+//    //    {
+//    //        GetOwner()->SpawnActor<DestroyEffect>(GetPosition());
+//    //        //게임 오버(게임 종료)
+//    //        QuitGame();
+//    //    }
+//    //}
+//}
 
 
 void Player::Move(float xDirection, float yDirection,float deltaTime)

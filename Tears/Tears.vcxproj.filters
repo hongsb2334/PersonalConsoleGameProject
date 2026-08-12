@@ -27,6 +27,18 @@
     <ClInclude Include="Actor\PlayerProjectile.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Actor\Damageable.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Enemy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\EnemyProjectile.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\EnemySpawner.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Player.cpp">
@@ -42,6 +54,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Actor\PlayerProjectile.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Damageable.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Enemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\EnemyProjectile.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\EnemySpawner.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

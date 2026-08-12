@@ -4,9 +4,5 @@
   </Configurations>
   <Folder Name="/솔루션 항목/" />
   <Project Path="CraftEngine/CraftEngine.vcxproj" Id="1456beba-5fd2-460a-9eca-a3f9539c6424" />
-  <Project Path="Game/Game.vcxproj" Id="3cbfae1a-e2a9-41f4-b9f3-78593feac5d8">
-    <BuildDependency Project="CraftEngine/CraftEngine.vcxproj" />
-  </Project>
-  <Project Path="ShootingGame/ShootingGame.vcxproj" Id="19bc5a41-ac90-4081-895e-76fcadcc8661" />
   <Project Path="Tears/Tears.vcxproj" Id="27131e85-6a31-4bee-820f-2d48a639d37e" />
 </Solution>
