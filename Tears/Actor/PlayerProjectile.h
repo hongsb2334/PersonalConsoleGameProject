@@ -8,13 +8,16 @@ class PlayerProjectile : public Craft::Actor
 
 public:
     PlayerProjectile(const Craft::Vector2& position);
-
+    
 private:
     //이벤트 함수 오버라이딩
     virtual void Tick(float deltaTime) override;
+    
+    //적 투사체 충돌시 처리
+    virtual void OnCollision(const std::shared_ptr<Craft::Actor>& other) override;
 
     //이동 속도 (빠르기 단위: 초)
-    float moveSpeed = 30.0f;
+    float moveSpeed = 70.0f;
 
     //위치 갱신을 할 때 사용할 변수
 
@@ -25,6 +28,7 @@ private:
     float xDirection = 0.0f;
     float yDirection = 0.0f;
 
+    int damage = 1;
    
 };
 

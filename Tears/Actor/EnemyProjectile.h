@@ -16,7 +16,7 @@ private:
     virtual void Tick(float deltaTime) override;
     virtual void OnCollision(const std::shared_ptr<Craft::Actor>& other) override;
 
-    float moveSpeed = 20.0f;
+    float moveSpeed = 70.0f;
 
     float xPosition = 0.0f;
     float yPosition = 0.0f;

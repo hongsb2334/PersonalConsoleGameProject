@@ -1,9 +1,10 @@
 ﻿#include "PlayerProjectile.h"
 #include <Engine/Engine.h>
 #include <Input/Input.h>
-
+#include <Actor/Enemy.h>
 
 using namespace Craft;
+
 PlayerProjectile::PlayerProjectile(const Craft::Vector2& position) 
     : Actor("@", position, Color::Blue), xPosition(static_cast<float>(position.x)), yPosition(static_cast<float>(position.y))
 {
@@ -54,3 +55,15 @@ void PlayerProjectile::Tick(float deltaTime)
     SetPosition(newPosition);
     
 }
+
+void PlayerProjectile::OnCollision(const std::shared_ptr<Craft::Actor>& other)
+{
+    //발사체가 Enemy에 닿으면 데미지를 주고 소멸
+    if (other->IsTypeOf<Enemy>())
+    {
+        Cast<Damageable>(other)->TakeDamage(damage);
+        Destroy();
+    }
+}
+
+

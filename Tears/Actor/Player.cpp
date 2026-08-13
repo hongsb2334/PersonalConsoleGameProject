@@ -68,9 +68,7 @@ void Player::Tick(float deltaTime)
     Move(xDirection, yDirection, deltaTime);
 
     ////발사 타이머 업데이트
-    //timer.Tick(deltaTime);
-
-    
+    timer.Tick(deltaTime);
 
     if (fireMode == FireMode::OneShot)
     {
@@ -107,28 +105,28 @@ void Player::Tick(float deltaTime)
 
 }
 
-//void Player::OnCollision(const std::shared_ptr<Actor>& other)
-//{
-//    super::OnCollision(other);
-//
-//    ////부딪힌 액터가 적 탄약이면 처리
-//    //if (other->IsTypeOf<EnemyBullet>())
-//    //{
-//    //    //플레이어 제거
-//    //    Destroy();
-//
-//    //    //적 탄약 제거
-//    //    other->Destroy();
-//
-//    //    //파괴 이펙트 생성
-//    //    if (GetOwner())
-//    //    {
-//    //        GetOwner()->SpawnActor<DestroyEffect>(GetPosition());
-//    //        //게임 오버(게임 종료)
-//    //        QuitGame();
-//    //    }
-//    //}
-//}
+void Player::OnCollision(const std::shared_ptr<Actor>& other)
+{
+    super::OnCollision(other);
+
+    ////부딪힌 액터가 적 탄약이면 처리
+    //if (other->IsTypeOf<EnemyBullet>())
+    //{
+    //    //플레이어 제거
+    //    Destroy();
+
+    //    //적 탄약 제거
+    //    other->Destroy();
+
+    //    //파괴 이펙트 생성
+    //    if (GetOwner())
+    //    {
+    //        GetOwner()->SpawnActor<DestroyEffect>(GetPosition());
+    //        //게임 오버(게임 종료)
+    //        QuitGame();
+    //    }
+    //}
+}
 
 
 void Player::Move(float xDirection, float yDirection,float deltaTime)

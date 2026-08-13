@@ -25,8 +25,8 @@ private:
     // 이벤트 함수 오버라이드
     virtual void Tick(float deltaTime) override;
 
-    ////충돌 이벤트 함수 오버라이드
-    //virtual void OnCollision(const std::shared_ptr<Actor>& other) override;
+    //충돌 이벤트 함수 오버라이드
+    virtual void OnCollision(const std::shared_ptr<Actor>& other) override;
 
     //이동 처리 함수
     void Move(float xDirection, float yDirection, float deltaTime);
@@ -48,7 +48,7 @@ private:
     float yPosition = 0.0f;
 
     //이동 속도 변수
-    float moveSpeed = 70.0f;
+    float moveSpeed = 30.0f;
 
     //발사 모드 추가
     FireMode fireMode = FireMode::None;

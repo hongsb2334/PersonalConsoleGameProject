@@ -89,21 +89,29 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Damageable.h" />
+    <ClInclude Include="Actor\Door.h" />
     <ClInclude Include="Actor\Enemy.h" />
     <ClInclude Include="Actor\EnemyProjectile.h" />
     <ClInclude Include="Actor\EnemySpawner.h" />
     <ClInclude Include="Actor\Player.h" />
     <ClInclude Include="Actor\PlayerProjectile.h" />
     <ClInclude Include="Level\MainLevel.h" />
+    <ClInclude Include="Level\Room.h" />
+    <ClInclude Include="Level\Room2.h" />
+    <ClInclude Include="Level\StartRoom.h" />
     <ClInclude Include="Util\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Damageable.cpp" />
+    <ClCompile Include="Actor\Door.cpp" />
     <ClCompile Include="Actor\Enemy.cpp" />
     <ClCompile Include="Actor\EnemyProjectile.cpp" />
     <ClCompile Include="Actor\EnemySpawner.cpp" />
     <ClCompile Include="Actor\PlayerProjectile.cpp" />
     <ClCompile Include="Level\MainLevel.cpp" />
+    <ClCompile Include="Level\Room.cpp" />
+    <ClCompile Include="Level\Room2.cpp" />
+    <ClCompile Include="Level\StartRoom.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Actor\Player.cpp" />
     <ClCompile Include="Util\Timer.cpp" />

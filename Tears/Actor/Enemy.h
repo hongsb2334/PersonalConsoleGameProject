@@ -21,7 +21,7 @@ protected:
 
     float xPosition = 0.0f;
     float yPosition = 0.0f;
-    float moveSpeed = 20.0f;
+    float moveSpeed = 10.0f;
 
 };
 
