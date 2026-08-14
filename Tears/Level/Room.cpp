@@ -1,10 +1,14 @@
 ﻿#include "Room.h"
+#include <Actor/Player.h>
+#include <Engine/Engine.h>
+
 using namespace Craft;
 
 void Room::OnInitialized()
 {
     super::OnInitialized();
 
+    SpawnPlayer();
     SpawnDoor();
     SpawnEnemies();
 
@@ -34,6 +38,20 @@ void Room::Tick(float deltaTime)
     }
 }
 
+void Room::SpawnPlayer()
+{
+    //Player의 상태 가져오기
+    std::shared_ptr<RunState> runState = Engine::Get().GetGameInstance<RunState>();
+    
+    //플레이어 스폰 후 위치 설정
+    std::shared_ptr<Player> player = SpawnActor<Player>(runState->playerHp);
+    //Todo: SpawnPosition이 쓰이는 지 확인 필요, 중복 코드 일지도 모름
+    player->SetSpawnPosition(GetEntryPosition(runState->entryDirection));
+
+    //한 방에서 사용한 진입 위치 값은 다음 방에서 사용하기 위해 초기화
+    runState->entryDirection = EntryDirection::None;
+}
+
 void Room::OnRoomCleared()
 {
     for (std::shared_ptr<Door>& door : doorList)
@@ -56,4 +74,21 @@ int Room::CountAliveEnemies() const
         }
     }
     return count;
+}
+
+Vector2 Room::GetEntryPosition(EntryDirection direction) const
+{
+    switch (direction)
+    {
+    case EntryDirection::Top:
+        return Vector2(Engine::Get().GetWidth() / 2, 1);
+    case EntryDirection::Bottom:
+        return Vector2(Engine::Get().GetWidth() / 2, Engine::Get().GetHeight() - 2);
+    case EntryDirection::Left:
+        return Vector2(1, Engine::Get().GetHeight() / 2);
+    case EntryDirection::Right:
+        return Vector2(Engine::Get().GetWidth() - 2, Engine::Get().GetHeight() / 2);
+    default:
+        return Vector2(Engine::Get().GetWidth() / 2, Engine::Get().GetHeight() - 2);
+    }
 }

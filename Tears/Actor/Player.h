@@ -17,7 +17,9 @@ class Player : public Craft::Damageable
     TYPE_DECLARATIONS(Player, Damageable)
 
 public:
-    Player();
+    Player(int initialHp = -1);
+
+    void SetSpawnPosition(const Craft::Vector2& newPosition);
 
 private:
     virtual void OnDeath() override;

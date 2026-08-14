@@ -9,7 +9,7 @@
 using namespace Craft;
 
 
-Player::Player() : Damageable("ISSAC", Vector2::Zero, Color::Green, 10), fireMode(FireMode::OneShot)
+Player::Player(int initialHp) : Damageable("ISSAC", Vector2::Zero, Color::Green, 10, initialHp), fireMode(FireMode::OneShot)
 {
     //생성 위치 설정
     int x = (Engine::Get().GetWidth() / 2) - (width / 2);
@@ -23,6 +23,12 @@ Player::Player() : Damageable("ISSAC", Vector2::Zero, Color::Green, 10), fireMod
     //연사 타이머 시간 설정
     timer.SetTargetTime(fireInterval);
 
+}
+void Player::SetSpawnPosition(const Craft::Vector2& newPosition)
+{
+    SetPosition(newPosition);
+    xPosition = static_cast<float>(newPosition.x);
+    yPosition = static_cast<float>(newPosition.y);
 }
 //죽음 함수 오버라이드
 void Player::OnDeath()

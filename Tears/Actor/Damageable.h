@@ -13,7 +13,8 @@ namespace Craft
             const std::string& image,
             const Vector2& position,
             Color color,
-            int maxHp
+            int maxHp,
+            int initialHp = -1
         );
 
         virtual void TakeDamage(int damage) final;

@@ -2,8 +2,8 @@
 
 
 using namespace Craft;
-Damageable::Damageable(const std::string& image, const Vector2& position, Color color, int maxHp)
-    : Actor(image, position, color), hp(maxHp), maxHp(maxHp)
+Damageable::Damageable(const std::string& image, const Vector2& position, Color color, int maxHp, int initialHp)
+    : Actor(image, position, color), hp((initialHp <0) ? maxHp : initialHp), maxHp(maxHp)
 {
 
 }

@@ -1,16 +1,9 @@
 ﻿#include "StartRoom.h"
-#include "Actor/Player.h"
+#include "Actor/Door.h"
 #include <Engine/Engine.h>
 #include <Level/Room2.h>
+#include <Core/RunState.h>
 using namespace Craft;
-void StartRoom::OnInitialized()
-{
-    super::OnInitialized();
-
-    SpawnActor<Player>();
-
-    SpawnDoor();
-}
 
 void StartRoom::SpawnDoor()
 {
@@ -19,6 +12,7 @@ void StartRoom::SpawnDoor()
 
     TrackSpawnedDoor<Door>(doorPosition, []()
         {
+            Engine::Get().GetGameInstance<RunState>()->entryDirection = EntryDirection::Bottom;
             Engine::Get().AddNewLevel<Room2>();
         }
     );

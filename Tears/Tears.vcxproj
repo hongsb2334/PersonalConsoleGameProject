@@ -95,9 +95,12 @@
     <ClInclude Include="Actor\EnemySpawner.h" />
     <ClInclude Include="Actor\Player.h" />
     <ClInclude Include="Actor\PlayerProjectile.h" />
+    <ClInclude Include="Core\RunState.h" />
     <ClInclude Include="Level\MainLevel.h" />
     <ClInclude Include="Level\Room.h" />
     <ClInclude Include="Level\Room2.h" />
+    <ClInclude Include="Level\Room3.h" />
+    <ClInclude Include="Level\Room4.h" />
     <ClInclude Include="Level\StartRoom.h" />
     <ClInclude Include="Util\Timer.h" />
   </ItemGroup>
@@ -111,6 +114,8 @@
     <ClCompile Include="Level\MainLevel.cpp" />
     <ClCompile Include="Level\Room.cpp" />
     <ClCompile Include="Level\Room2.cpp" />
+    <ClCompile Include="Level\Room3.cpp" />
+    <ClCompile Include="Level\Room4.cpp" />
     <ClCompile Include="Level\StartRoom.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Actor\Player.cpp" />

@@ -2,6 +2,7 @@
 #include <Level/Level.h>
 #include <Actor/Enemy.h>
 #include <Actor/Door.h>
+#include <Core/RunState.h>
 class Room : public Craft::Level
 {
     TYPE_DECLARATIONS(Room, Level);
@@ -16,6 +17,9 @@ protected:
 
     //적 스폰하는 함수, 이전에 랜덤한 초마다 스폰하던 것과 달리 한번에 스폰, 구현은 파생 클래스에서 함
     virtual void SpawnEnemies() {}
+
+    //플레이어 스폰
+    void SpawnPlayer();
 
     //방 클리어시 호출(클리어 후 등록된 문 활성화)
     virtual void OnRoomCleared();
@@ -44,6 +48,7 @@ protected:
     //Enemy의 수를 카운트하는 함수
     int CountAliveEnemies() const;
 
+    Craft::Vector2 GetEntryPosition(EntryDirection direction) const;
 
 protected:
     std::vector<std::shared_ptr<Enemy>> spawnedEnemyList;

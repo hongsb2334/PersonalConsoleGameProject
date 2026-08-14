@@ -4,5 +4,7 @@
   </Configurations>
   <Folder Name="/솔루션 항목/" />
   <Project Path="CraftEngine/CraftEngine.vcxproj" Id="1456beba-5fd2-460a-9eca-a3f9539c6424" />
-  <Project Path="Tears/Tears.vcxproj" Id="27131e85-6a31-4bee-820f-2d48a639d37e" />
+  <Project Path="Tears/Tears.vcxproj" Id="27131e85-6a31-4bee-820f-2d48a639d37e">
+    <BuildDependency Project="CraftEngine/CraftEngine.vcxproj" />
+  </Project>
 </Solution>

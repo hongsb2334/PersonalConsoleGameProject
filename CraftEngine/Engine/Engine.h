@@ -12,6 +12,7 @@ namespace Craft
 	class Input;
 	class Renderer;
     class CollisionSystem;
+    class GameInstance;
 
 	//메인 엔진 클래스
 	//엔진 루프 제공
@@ -56,6 +57,22 @@ namespace Craft
 			//추가 요청 레벨 객체 생성.
 			nextLevel = std::make_shared<T>();
 		}
+
+        //GameInstance 생성 함수
+        template<typename T, typename = std::enable_if_t<std::is_base_of<GameInstance, T>::value>>
+        void CreateGameInstance()
+        {
+            //게임 인스턴스 생성
+            gameInstance = std::make_shared<T>();
+        }
+
+        template<typename T>
+        std::shared_ptr<T> GetGameInstance()
+        {
+            return dynamic_pointer_cast<T>(gameInstance);
+        }
+        
+
 		//전역 접근 함수
 		static Engine& Get();
 
@@ -118,6 +135,11 @@ namespace Craft
 
         //충돌 시스템 객체
         std::unique_ptr<CollisionSystem> collisionSystem;
+
+        //GameInstance 객체
+        std::shared_ptr<GameInstance> gameInstance;
+
+
 	};
 
 }
