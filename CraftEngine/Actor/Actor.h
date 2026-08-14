@@ -7,7 +7,7 @@
 #include <memory>			//std::weak_ptr 사용을 위해
 #include <string>
 
-namespace Craft 
+namespace Craft
 {
 	//전방 선언
 	class Level;

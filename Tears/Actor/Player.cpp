@@ -9,7 +9,7 @@
 using namespace Craft;
 
 
-Player::Player(int initialHp) : Damageable("ISSAC", Vector2::Zero, Color::Green, 10, initialHp), fireMode(FireMode::OneShot)
+Player::Player(int initialHp) : Damageable("ISSAC", Vector2::Zero, Color::Green, 500, initialHp), fireMode(FireMode::OneShot)
 {
     //생성 위치 설정
     int x = (Engine::Get().GetWidth() / 2) - (width / 2);

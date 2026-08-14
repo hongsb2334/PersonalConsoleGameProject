@@ -2,7 +2,7 @@
 #include <Engine/Engine.h>
 #include <Input/Input.h>
 #include <Actor/Enemy.h>
-
+#include <cmath>
 using namespace Craft;
 
 PlayerProjectile::PlayerProjectile(const Craft::Vector2& position) 
@@ -30,11 +30,20 @@ PlayerProjectile::PlayerProjectile(const Craft::Vector2& position)
     {
         yDirection = -1.0f;
     }
+
+    
 }
 
 void PlayerProjectile::Tick(float deltaTime)
 {
     super::Tick(deltaTime);
+
+    float length = std::sqrt(xDirection * xDirection + yDirection * yDirection);
+    if (length > 0.0f)
+    {
+        xDirection /= length;
+        yDirection /= length;
+    }
 
     //8방향 이동 처리
     xPosition += xDirection * moveSpeed * deltaTime;

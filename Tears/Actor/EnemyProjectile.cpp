@@ -10,7 +10,6 @@ EnemyProjectile::EnemyProjectile(const Craft::Vector2& position, float xDirectio
     xPosition(static_cast<float>(position.x)), yPosition(static_cast<float>(position.y)), 
     xDirection(xDirection), yDirection(yDirection)
 {
-    
 }
 
 void EnemyProjectile::Tick(float deltaTime)

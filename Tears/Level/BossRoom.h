@@ -1,11 +1,10 @@
 ﻿#pragma once
 #include <Level/Room.h>
 
-class Room3 : public Room
+class BossRoom : public Room
 {
-    TYPE_DECLARATIONS(Room3, Room)
-
     virtual void SpawnDoor() override;
     virtual void SpawnEnemies() override;
+
 };
 

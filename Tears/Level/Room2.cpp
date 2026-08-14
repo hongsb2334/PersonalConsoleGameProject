@@ -24,9 +24,9 @@ void Room2::SpawnDoor()
         {
             Engine::Get().GetGameInstance<RunState>()->entryDirection = EntryDirection::Left;
             Engine::Get().AddNewLevel<Room4>();
-        }
+        },
+        DoorDirection::Vertical
     );
-
 }
 
 void Room2::SpawnEnemies()

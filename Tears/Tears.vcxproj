@@ -96,6 +96,7 @@
     <ClInclude Include="Actor\Player.h" />
     <ClInclude Include="Actor\PlayerProjectile.h" />
     <ClInclude Include="Core\RunState.h" />
+    <ClInclude Include="Level\BossRoom.h" />
     <ClInclude Include="Level\MainLevel.h" />
     <ClInclude Include="Level\Room.h" />
     <ClInclude Include="Level\Room2.h" />
@@ -111,6 +112,7 @@
     <ClCompile Include="Actor\EnemyProjectile.cpp" />
     <ClCompile Include="Actor\EnemySpawner.cpp" />
     <ClCompile Include="Actor\PlayerProjectile.cpp" />
+    <ClCompile Include="Level\BossRoom.cpp" />
     <ClCompile Include="Level\MainLevel.cpp" />
     <ClCompile Include="Level\Room.cpp" />
     <ClCompile Include="Level\Room2.cpp" />
