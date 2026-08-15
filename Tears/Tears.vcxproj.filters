@@ -66,6 +66,24 @@
     <ClInclude Include="Level\TitleLevel.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Level\GameOverLevel.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShootingGame\Level\GameLevel.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\SelectMenu.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\ResultLevel.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\WinLevel.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor\Boss.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Player.cpp">
@@ -117,6 +135,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Level\TitleLevel.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShootingGame\Level\GameLevel.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\SelectMenu.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\ResultLevel.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Boss.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

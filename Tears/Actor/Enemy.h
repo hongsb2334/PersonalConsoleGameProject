@@ -7,7 +7,7 @@ class Enemy : public Craft::Damageable
     TYPE_DECLARATIONS(Enemy, Damageable)
 
 public:
-    Enemy(const Craft::Vector2& position);
+    Enemy(const Craft::Vector2& position, int maxHp = 1, int damage = 1);
     
 protected:
     virtual void Tick(float deltaTime) override;

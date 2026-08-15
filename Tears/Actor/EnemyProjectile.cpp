@@ -5,10 +5,10 @@
 
 using namespace Craft;
 
-EnemyProjectile::EnemyProjectile(const Craft::Vector2& position, float xDirection, float yDirection)
+EnemyProjectile::EnemyProjectile(const Craft::Vector2& position, float xDirection, float yDirection, int damage)
     : Actor("*", position, Color::Yellow), 
     xPosition(static_cast<float>(position.x)), yPosition(static_cast<float>(position.y)), 
-    xDirection(xDirection), yDirection(yDirection)
+    xDirection(xDirection), yDirection(yDirection), damage(damage)
 {
 }
 

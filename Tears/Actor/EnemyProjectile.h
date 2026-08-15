@@ -9,7 +9,8 @@ public:
     EnemyProjectile(
         const Craft::Vector2& position,
         float xDirection,
-        float yDirection
+        float yDirection,
+        int damage = 1
     );
 
 private:

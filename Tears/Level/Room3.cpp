@@ -7,7 +7,7 @@ using namespace Craft;
 
 void Room3::SpawnDoor()
 {
-    Vector2 rightDoorPosition(Engine::Get().GetWidth() - 1, Engine::Get().GetHeight() / 2);
+    Vector2 rightDoorPosition(Engine::Get().GetWidth() - 1, Engine::Get().GetHeight() / 2 - (Door::doorLength / 2));
 
     //오른쪽 문 진입시 다음 레벨에서는 왼쪽에서 시작
     TrackSpawnedDoor<Door>(rightDoorPosition, []()

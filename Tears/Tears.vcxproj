@@ -88,6 +88,8 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\ShootingGame\Level\GameLevel.h" />
+    <ClInclude Include="Actor\Boss.h" />
     <ClInclude Include="Actor\Damageable.h" />
     <ClInclude Include="Actor\Door.h" />
     <ClInclude Include="Actor\Enemy.h" />
@@ -97,16 +99,22 @@
     <ClInclude Include="Actor\PlayerProjectile.h" />
     <ClInclude Include="Core\RunState.h" />
     <ClInclude Include="Level\BossRoom.h" />
+    <ClInclude Include="Level\GameOverLevel.h" />
     <ClInclude Include="Level\MainLevel.h" />
+    <ClInclude Include="Level\ResultLevel.h" />
     <ClInclude Include="Level\Room.h" />
     <ClInclude Include="Level\Room2.h" />
     <ClInclude Include="Level\Room3.h" />
     <ClInclude Include="Level\Room4.h" />
     <ClInclude Include="Level\StartRoom.h" />
     <ClInclude Include="Level\TitleLevel.h" />
+    <ClInclude Include="Level\WinLevel.h" />
+    <ClInclude Include="UI\SelectMenu.h" />
     <ClInclude Include="Util\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\ShootingGame\Level\GameLevel.cpp" />
+    <ClCompile Include="Actor\Boss.cpp" />
     <ClCompile Include="Actor\Damageable.cpp" />
     <ClCompile Include="Actor\Door.cpp" />
     <ClCompile Include="Actor\Enemy.cpp" />
@@ -115,6 +123,7 @@
     <ClCompile Include="Actor\PlayerProjectile.cpp" />
     <ClCompile Include="Level\BossRoom.cpp" />
     <ClCompile Include="Level\MainLevel.cpp" />
+    <ClCompile Include="Level\ResultLevel.cpp" />
     <ClCompile Include="Level\Room.cpp" />
     <ClCompile Include="Level\Room2.cpp" />
     <ClCompile Include="Level\Room3.cpp" />
@@ -123,6 +132,7 @@
     <ClCompile Include="Level\TitleLevel.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Actor\Player.cpp" />
+    <ClCompile Include="UI\SelectMenu.cpp" />
     <ClCompile Include="Util\Timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

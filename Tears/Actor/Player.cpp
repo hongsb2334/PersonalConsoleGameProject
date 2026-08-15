@@ -2,6 +2,7 @@
 #include <Engine/Engine.h>
 #include <Input/Input.h>
 #include <Level/Level.h>
+#include <Level/GameOverLevel.h>
 #include <Actor/PlayerProjectile.h>
 #include <cmath>
 
@@ -9,7 +10,7 @@
 using namespace Craft;
 
 
-Player::Player(int initialHp) : Damageable("ISSAC", Vector2::Zero, Color::Green, 500, initialHp), fireMode(FireMode::OneShot)
+Player::Player(int initialHp) : Damageable("ISSAC", Vector2::Zero, Color::Green, 10, initialHp), fireMode(FireMode::OneShot)
 {
     //생성 위치 설정
     int x = (Engine::Get().GetWidth() / 2) - (width / 2);
@@ -34,7 +35,7 @@ void Player::SetSpawnPosition(const Craft::Vector2& newPosition)
 void Player::OnDeath()
 {
     super::OnDeath();
-    QuitGame();
+    Engine::Get().AddNewLevel<GameOverLevel>();
 }
 // 이벤트 함수 오버라이드
 

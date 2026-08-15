@@ -6,7 +6,7 @@
 #include <cmath>
 using namespace Craft;
 
-Enemy::Enemy(const Craft::Vector2& position) : Damageable("enemy", position, Color::Red, 1), xPosition(static_cast<float>(position.x)), yPosition(static_cast<float>(position.y))
+Enemy::Enemy(const Craft::Vector2& position, int maxHp, int damage) : Damageable("enemy", position, Color::Red, maxHp), xPosition(static_cast<float>(position.x)), yPosition(static_cast<float>(position.y))
 {
     fireTimer.SetTargetTime(fireInterval);
 }
@@ -86,7 +86,7 @@ void Enemy::Fire()
         dy /= length;
     }
 
-    owner->SpawnActor<EnemyProjectile>(bulletPosition, dx, dy);
+    owner->SpawnActor<EnemyProjectile>(bulletPosition, dx, dy, damage);
 
 }
 

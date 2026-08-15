@@ -1,7 +1,7 @@
 ﻿#include "Room.h"
 #include <Actor/Player.h>
 #include <Engine/Engine.h>
-
+#include <Render/Renderer.h>
 using namespace Craft;
 
 void Room::OnInitialized()
@@ -35,6 +35,18 @@ void Room::Tick(float deltaTime)
     {
         isCleared = true;
         OnRoomCleared();
+    }
+}
+
+void Room::Draw()
+{
+    super::Draw();
+
+    std::shared_ptr<Player> player = FindActor<Player>();
+    if (player)
+    {
+        std::string hpText = "HP : " + std::to_string(player->GetHp()) + " / " + std::to_string(player->GetMaxHp());
+        Renderer::Get().Submit(hpText, Vector2(1, 0), Color::White);
     }
 }
 

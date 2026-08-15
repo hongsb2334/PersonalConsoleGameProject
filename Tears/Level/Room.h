@@ -10,6 +10,7 @@ class Room : public Craft::Level
 public:
     virtual void OnInitialized();
     virtual void Tick(float deltaTime);
+    virtual void Draw();
 
 protected:
     //문 스폰하는 함수, 구현은 파생 클래스에서 함
