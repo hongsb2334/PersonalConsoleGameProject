@@ -52,21 +52,21 @@ void Player::Tick(float deltaTime)
     //방향키 입력에 따른 이동 방향 설정
     //오른쪽 방향 : 1, 왼쪽 방향 : -1.
     float xDirection = 0.0f;
-    if (Input::Get().GetKey('D'))
+    if (Input::Get().GetKey(VK_RIGHT))
     {
         xDirection = 1.0f;
     }
-    if (Input::Get().GetKey('A'))
+    if (Input::Get().GetKey(VK_LEFT))
     {
         xDirection = -1.0f;
     }
 
     float yDirection = 0.0f;
-    if (Input::Get().GetKey('S'))
+    if (Input::Get().GetKey(VK_DOWN))
     {
         yDirection = 1.0f;
     }
-    if (Input::Get().GetKey('W'))
+    if (Input::Get().GetKey(VK_UP))
     {
         yDirection = -1.0f;
     }

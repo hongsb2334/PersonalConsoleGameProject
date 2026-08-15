@@ -9,7 +9,7 @@ void StartRoom::OnInitialized()
 {
     super::OnInitialized();
 
-    std::string moveTutorial = "WSAD : 이동";
+    std::string moveTutorial = "방향키 : 이동";
     std::string fireGuide = "SPACE : 발사  R : 발사 모드 변경";
 
     int moveX = (Engine::Get().GetWidth() / 2) - (static_cast<int>(moveTutorial.length()) / 2);

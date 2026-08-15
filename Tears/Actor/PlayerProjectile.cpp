@@ -8,19 +8,19 @@ using namespace Craft;
 PlayerProjectile::PlayerProjectile(const Craft::Vector2& position) 
     : Actor("@", position, Color::Blue), xPosition(static_cast<float>(position.x)), yPosition(static_cast<float>(position.y))
 {
-    if (Input::Get().GetKey('W'))
+    if (Input::Get().GetKey(VK_UP))
     {
         yDirection = -1.0f;
     }
-    if (Input::Get().GetKey('S'))
+    if (Input::Get().GetKey(VK_DOWN))
     {
         yDirection = 1.0f;
     }
-    if (Input::Get().GetKey('D'))
+    if (Input::Get().GetKey(VK_RIGHT))
     {
         xDirection = 1.0f;
     }
-    if (Input::Get().GetKey('A'))
+    if (Input::Get().GetKey(VK_LEFT))
     {
         xDirection = -1.0f;
     }
