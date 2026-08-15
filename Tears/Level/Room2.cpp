@@ -8,8 +8,8 @@ using namespace Craft;
 
 void Room2::SpawnDoor()
 {
-    Vector2 topDoorPosition(Engine::Get().GetWidth() / 2, 0);
-    Vector2 rightDoorPosition(Engine::Get().GetWidth() - 1, Engine::Get().GetHeight() / 2);
+    Vector2 topDoorPosition(Engine::Get().GetWidth() / 2 - (Door::doorLength / 2), 0);
+    Vector2 rightDoorPosition(Engine::Get().GetWidth() - 1, Engine::Get().GetHeight() / 2 - (Door::doorLength / 2));
 
     //위쪽 문으로 나갈 시 다음 레벨의 아래쪽부터 시작
     TrackSpawnedDoor<Door>(topDoorPosition, []()

@@ -7,7 +7,7 @@
 using namespace Craft;
 
 Door::Door(const Craft::Vector2& position, std::function<void()> onEnter, DoorDirection doorDirection)
-    : Actor("#####", position, Craft::Color::Green), onEnter(onEnter), doorDirection(doorDirection)
+    : Actor("#######", position, Craft::Color::Green), onEnter(onEnter), doorDirection(doorDirection)
 {
     if (doorDirection == DoorDirection::Vertical)
     {

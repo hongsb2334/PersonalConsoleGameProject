@@ -48,7 +48,7 @@ protected:
     //Enemy의 수를 카운트하는 함수
     int CountAliveEnemies() const;
 
-    Craft::Vector2 GetEntryPosition(EntryDirection direction) const;
+    Craft::Vector2 GetEntryPosition(EntryDirection direction, int playerWidth) const;
 
 protected:
     std::vector<std::shared_ptr<Enemy>> spawnedEnemyList;

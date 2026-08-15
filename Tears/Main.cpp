@@ -1,8 +1,8 @@
 ﻿#include <Engine/Engine.h>
 //#include <Level/MainLevel.h>
 #include <Core/RunState.h>
-#include <Level/StartRoom.h>
 #include <Util/Util.h>
+#include <Level/TitleLevel.h>
 
 
 int main()
@@ -14,6 +14,6 @@ int main()
     //엔진 객체 생성 및 실행
     Craft::Engine engine;
     engine.CreateGameInstance<RunState>();
-    engine.AddNewLevel<StartRoom>();
+    engine.AddNewLevel<TitleLevel>();
     engine.Run();
 }

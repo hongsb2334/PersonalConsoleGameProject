@@ -22,11 +22,16 @@ protected:
     virtual void OnCollision(const std::shared_ptr<Craft::Actor>& other);
 private:
     
+    //문 열림 플래그
     bool isOpen = false;
     
+    //문 방향은 기본 가로로 세팅
     DoorDirection doorDirection = DoorDirection::Horizontal;
 
     //문에 들어갔을 때 할 동작(다음 Room으로 전환하는 로직을 람다로 전달 할거임)
     std::function<void()> onEnter;
+
+public:
+    static const int doorLength = 7;
 };
 

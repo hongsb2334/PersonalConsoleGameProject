@@ -106,9 +106,6 @@ void Player::Tick(float deltaTime)
             fireMode = FireMode::OneShot;
         }
     }
-
-
-
 }
 
 void Player::OnCollision(const std::shared_ptr<Actor>& other)

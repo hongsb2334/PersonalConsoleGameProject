@@ -103,6 +103,7 @@
     <ClInclude Include="Level\Room3.h" />
     <ClInclude Include="Level\Room4.h" />
     <ClInclude Include="Level\StartRoom.h" />
+    <ClInclude Include="Level\TitleLevel.h" />
     <ClInclude Include="Util\Timer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +120,7 @@
     <ClCompile Include="Level\Room3.cpp" />
     <ClCompile Include="Level\Room4.cpp" />
     <ClCompile Include="Level\StartRoom.cpp" />
+    <ClCompile Include="Level\TitleLevel.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Actor\Player.cpp" />
     <ClCompile Include="Util\Timer.cpp" />
