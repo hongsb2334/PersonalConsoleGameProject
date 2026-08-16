@@ -22,6 +22,19 @@ void Damageable::TakeDamage(int damage)
         OnDeath();
     }
 }
+void Craft::Damageable::Heal(int amount)
+{
+    if (IsDead())
+    {
+        return;
+    }
+
+    hp += amount;
+    if (hp > maxHp)
+    {
+        hp = maxHp;
+    }
+}
 void Damageable::OnDeath()
 {
     Destroy();

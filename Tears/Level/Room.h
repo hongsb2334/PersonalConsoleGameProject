@@ -3,6 +3,8 @@
 #include <Actor/Enemy.h>
 #include <Actor/Door.h>
 #include <Core/RunState.h>
+#include <Util/Timer.h>
+
 class Room : public Craft::Level
 {
     TYPE_DECLARATIONS(Room, Level);
@@ -56,4 +58,7 @@ protected:
     std::vector<std::shared_ptr<Door>> doorList;
     //Room 안의 적을 모두 처치했는지 플래그
     bool isCleared = false;
+
+private:
+    Timer healItemTimer{ 5.0f };
 };

@@ -114,7 +114,7 @@ void Player::OnCollision(const std::shared_ptr<Actor>& other)
     super::OnCollision(other);
 
     ////부딪힌 액터가 적 탄약이면 처리
-    //if (other->IsTypeOf<EnemyBullet>())
+    //if (other->IsTypeOf<EnemyBullet>()) 
     //{
     //    //플레이어 제거
     //    Destroy();
@@ -197,6 +197,8 @@ void Player::Fire()
     if (owner)
     {
         owner->SpawnActor<PlayerProjectile>(bulletPosition);
+
+        Engine::Get().PlayOneShot("Retro_Laser_Shoot.wav");
     }
 }
 

@@ -16,9 +16,10 @@ namespace Craft
             int maxHp,
             int initialHp = -1
         );
-
+        //데미지 처리 함수
         virtual void TakeDamage(int damage) final;
-
+        //체력 회복 아이템 함수
+        void Heal(int amount);
         //getter
         inline int GetHp() const { return hp; }
         inline int GetMaxHp() const { return maxHp; }

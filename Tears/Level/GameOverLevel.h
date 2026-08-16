@@ -6,7 +6,7 @@ class GameOverLevel : public ResultLevel
     TYPE_DECLARATIONS(GameOverLevel, ResultLevel)
 
 public:
-    GameOverLevel() : ResultLevel("Game Over", Craft::Color::Red) {}
+    GameOverLevel() : ResultLevel("Game Over", Craft::Color::Red, "GameOver.wav") {}
 
 };
 

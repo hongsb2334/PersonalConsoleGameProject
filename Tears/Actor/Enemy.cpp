@@ -6,7 +6,7 @@
 #include <cmath>
 using namespace Craft;
 
-Enemy::Enemy(const Craft::Vector2& position, int maxHp, int damage) : Damageable("enemy", position, Color::Red, maxHp), xPosition(static_cast<float>(position.x)), yPosition(static_cast<float>(position.y))
+Enemy::Enemy(const Craft::Vector2& position, int maxHp, int damage) : Damageable("enemy", position, Color::Red, maxHp), damage(damage), xPosition(static_cast<float>(position.x)), yPosition(static_cast<float>(position.y))
 {
     fireTimer.SetTargetTime(fireInterval);
 }

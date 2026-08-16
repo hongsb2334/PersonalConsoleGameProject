@@ -1,12 +1,16 @@
 ﻿#include "Room.h"
 #include <Actor/Player.h>
+#include <Actor/HealItem.h>
 #include <Engine/Engine.h>
 #include <Render/Renderer.h>
+#include <Util/Util.h>
 using namespace Craft;
 
 void Room::OnInitialized()
 {
     super::OnInitialized();
+
+    Engine::Get().PlayBackGroundMusic("BackGroundMusic.wav");
 
     SpawnPlayer();
     SpawnDoor();
@@ -30,6 +34,17 @@ void Room::Tick(float deltaTime)
     {
         return;
     }
+
+    //힐 아이템 스폰(5초마다 랜덤 위치에 스폰)
+    healItemTimer.Tick(deltaTime);
+    if (healItemTimer.IsTimeOut())
+    {
+        int x = Util::RandomRange(1, Engine::Get().GetWidth() - 2);
+        int y = Util::RandomRange(1, Engine::Get().GetHeight() - 2);
+        SpawnActor<HealItem>(Vector2(x, y));
+        healItemTimer.Reset();
+    }
+
 
     if (CountAliveEnemies() == 0)
     {

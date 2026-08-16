@@ -2,8 +2,10 @@
 
 #include <Core/Core.h>
 #include <memory> // 스마트 포인터 사용을 위해
+#include <string>
 
-
+//Sound 클래스는 Craft namespace를 사용하지 않았기 때문에 밖에다 전방선언
+class Sound;
 // CraftEngine 프로젝트 안의 클래스는 Craft 네임스페이스 사용
 namespace Craft 
 {
@@ -44,6 +46,11 @@ namespace Craft
 
 		//엔진 종료 함수
 		void Quit();
+
+        //사운드 재생 함수(사운드시스템 래퍼 함수)
+        void PlayOneShot(const std::string& filename);
+        void PlayBackGroundMusic(const std::string& filename);
+        void StopBackGroundMusic();
 
 		// 레벨 추가 요청 함수
 		// 1. std::is_base_of 하는 일이 무엇인지
@@ -138,6 +145,9 @@ namespace Craft
 
         //GameInstance 객체
         std::shared_ptr<GameInstance> gameInstance;
+
+        //SoundSystem 객체
+        std::unique_ptr<Sound> sound;
 
 
 	};

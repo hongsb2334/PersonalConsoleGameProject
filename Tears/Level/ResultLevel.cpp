@@ -7,8 +7,11 @@
 
 using namespace Craft;
 
-ResultLevel::ResultLevel(const std::string& title, Craft::Color titleColor) : title(title), titleColor(titleColor)
+ResultLevel::ResultLevel(const std::string& title, Craft::Color titleColor, const std::string& filename) : title(title), titleColor(titleColor)
 {
+    Engine::Get().StopBackGroundMusic();
+    Engine::Get().PlayOneShot(filename);
+
     menu = std::make_shared<SelectMenu>(std::vector<Item>{
         Item("Retry", []()
             {

@@ -7,6 +7,7 @@
 //#include <chrono> 얘도 시간관련
 #include <Windows.h>	// 언리얼은 chrono 안쓰고 Windows.h씀
 #include <cassert>	
+#include <SoundSystem/Sound.h>
 
 namespace Craft
 {
@@ -29,6 +30,9 @@ namespace Craft
 
         //콜리전 시스템 객체 생성
         collisionSystem = std::make_unique<CollisionSystem>();
+
+        //사운드 시스템 객체 생성
+        sound = std::make_unique<Sound>();
 	}
 	Engine::~Engine()
 	{
@@ -142,6 +146,35 @@ namespace Craft
 		//엔진 종료 플래그 설정
 		isQuit = true;
 	}
+    void Engine::PlayOneShot(const std::string& filename)
+    {
+        if (!sound)
+        {
+            return;
+        }
+
+        //사운드 시스템 함수 호출, Asset/Sound 경로로 지정했었음
+        sound->PlayOneShot(std::string("../Assets/Sound/") + filename);
+    }
+    void Engine::PlayBackGroundMusic(const std::string& filename)
+    {
+        if (!sound)
+        {
+            return;
+        }
+
+        //사운드 시스템 함수 호출, Asset/Sound 경로로 지정했었음
+        sound->PlayBackgroundMusic(std::string("../Assets/Sound/") + filename);
+    }
+    void Engine::StopBackGroundMusic()
+    {
+        if (!sound)
+        {
+            return;
+        }
+
+        sound->StopBackgroundMusic();
+    }
 	Engine& Engine::Get()
 	{
 		//디버그 모드에서만 동작
