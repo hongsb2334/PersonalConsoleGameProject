@@ -12,7 +12,7 @@ void Room4::SpawnDoor()
     TrackSpawnedDoor<Door>(topDoorPosition, []()
         {
             Engine::Get().GetGameInstance<RunState>()->entryDirection = EntryDirection::Bottom;
-            Engine::Get().AddNewLevel<BossRoom>();
+            Engine::Get().AddNewLevel<BossRoom>();  
         }
     );
 }
