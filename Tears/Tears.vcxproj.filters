@@ -21,9 +21,6 @@
     <ClInclude Include="Util\Timer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Level\MainLevel.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Actor\PlayerProjectile.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -34,9 +31,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Actor\EnemyProjectile.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Actor\EnemySpawner.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Level\Room.h">
@@ -69,9 +63,6 @@
     <ClInclude Include="Level\GameOverLevel.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\ShootingGame\Level\GameLevel.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="UI\SelectMenu.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -98,9 +89,6 @@
     <ClCompile Include="Util\Timer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Level\MainLevel.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Actor\PlayerProjectile.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -111,9 +99,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Actor\EnemyProjectile.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Actor\EnemySpawner.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Level\Room.cpp">
@@ -138,9 +123,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Level\TitleLevel.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ShootingGame\Level\GameLevel.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="UI\SelectMenu.cpp">

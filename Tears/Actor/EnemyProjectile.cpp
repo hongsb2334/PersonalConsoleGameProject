@@ -36,7 +36,7 @@ void EnemyProjectile::OnCollision(const std::shared_ptr<Craft::Actor>& other)
     //발사체가 만약 Player에 닿으면 데미지를 주고 소멸
     if (other->IsTypeOf<Player>())
     {
-        Engine::Get().PlayOneShot("Explision.wav");
+        Engine::Get().PlayOneShot("Explosion.wav");
         Cast<Damageable>(other)->TakeDamage(damage);
         Destroy();
     }
