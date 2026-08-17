@@ -2,10 +2,13 @@
 #include <Core/RunState.h>
 #include <Util/Util.h>
 #include <Level/TitleLevel.h>
-
+#include <Windows.h>
 
 int main()
 {
+    //한글 깨짐 문제 해결
+    SetConsoleOutputCP(949);
+
     //랜덤 시드 엔진 초기화
     Util::SetRandomSeed();
 
