@@ -1,15 +1,7 @@
 ﻿#pragma once
 #include <Core/GameInstance.h>
+#include "EntryDirection.h"
 
-//Player가 레벨에서 시작 할 위치 
-enum class EntryDirection
-{
-    None,
-    Top,
-    Bottom,
-    Left,
-    Right
-};
 
 class RunState : public Craft::GameInstance
 {

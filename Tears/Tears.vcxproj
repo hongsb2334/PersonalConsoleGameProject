@@ -97,6 +97,8 @@
     <ClInclude Include="Actor\HealItem.h" />
     <ClInclude Include="Actor\Player.h" />
     <ClInclude Include="Actor\PlayerProjectile.h" />
+    <ClInclude Include="Core\Dungeon.h" />
+    <ClInclude Include="Core\EntryDirection.h" />
     <ClInclude Include="Core\RunState.h" />
     <ClInclude Include="Level\BossRoom.h" />
     <ClInclude Include="Level\GameOverLevel.h" />
@@ -119,6 +121,7 @@
     <ClCompile Include="Actor\EnemyProjectile.cpp" />
     <ClCompile Include="Actor\HealItem.cpp" />
     <ClCompile Include="Actor\PlayerProjectile.cpp" />
+    <ClCompile Include="Core\Dungeon.cpp" />
     <ClCompile Include="Level\BossRoom.cpp" />
     <ClCompile Include="Level\ResultLevel.cpp" />
     <ClCompile Include="Level\Room.cpp" />
