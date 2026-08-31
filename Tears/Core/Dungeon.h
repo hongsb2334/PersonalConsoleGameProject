@@ -1,9 +1,8 @@
 ﻿#pragma once
 
 //던전 평면도에서의 좌표
-class GridCoord
+struct GridCoord
 {
-public:
     GridCoord() = default;
     GridCoord(int x, int y) : x(x), y(y) {}
 
@@ -21,8 +20,8 @@ public:
     int y = 0;
 };
 
-// 해시 테이블
-class GridCoordHash 
+// 해시 테이블, 던전 평면도 좌표를 전달받아서 해시맵의 키 형태로 리턴
+struct GridCoordHash 
 {
 public:
 
