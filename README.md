@@ -141,7 +141,7 @@ Tears/
 
 개발 일정, 잘했던 점과 부족했던 점, 마주쳤던 문제(터미널 창 크기 이슈, 레벨 전환 시 HP 초기화 문제)와 해결 과정, 다음에 시도해보고 싶은 개선 사항은 아래 글에 정리했습니다.
 
-- ([https://velog.io/@hongsb2334/ConsoleGameProject-Part1](https://velog.io/@hongsb2334/ConsoleGameProject-Part1))
+- https://velog.io/@hongsb2334/%ED%9A%8C%EA%B3%A0-ConsoleGameProject-Part1
 
 <br>
 
