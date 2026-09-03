@@ -78,17 +78,25 @@ bool DungeonMap::GenerateRoomOnce(int roomNum)
             //방 방향에 맞는 offset값 받아서             
             GridCoord offset = GetOffset(entry);
             GridCoord newCoord = current->coord + offset;
+            //unordered_map에서 newCoord의 키가 이미 존재하면 방이 이미 그 좌표에 생성되어 있는 것이기 때문에 방을 가져오고, 아니면 그 좌표에 RoomNode를 새로 생성
             RoomNode& newRoom = dungeon[newCoord];
-            //새로 생긴 노드는 위치가 (0, 0)으로 초기화되기 때문에 직접 넣어줘야 함
-            newRoom.coord = newCoord;
+
             
             //방 생성했는데 방이 이미 생성되어 있는 좌표에 생성했으면 continue
             if (newRoom.occupied)
             {
                 continue;
             }
+            else
+            {
+                //새로 생긴 노드는 위치가 (0, 0)으로 초기화되기 때문에 직접 넣어줘야 함.
+                //위에서 만약 이미 키가 존재했을 때 newRoom에 이미 존재하던 방이 참조가 되더라도 이 연산에 의해 기존 좌표에서 새 좌표로 바뀌진 않으나
+                //직관적인 코드를 지향하고 있어서 이렇게 리팩터링
+                newRoom.coord = newCoord;
+            }
 
             //50%의 확률로 continue
+            //만약 빈 좌표에 새로 방을 생성했는데 여기에 걸리면 occupied가 아직 false이기 때문에 나중에 같은 좌표에 다시 접근해서 또 이 과정을 시도한다. 여러번 방 생성을 시도할 수 있음
             if (Util::RandomRange(0, 1))
             {
                 continue;
@@ -110,8 +118,6 @@ bool DungeonMap::GenerateRoomOnce(int roomNum)
             endRoomList.push_back(current);
         }
     }
-
-
 
     //보스방이 시작 방과 바로 붙어있는지 확인
     if (roomCount != roomNum)
@@ -135,7 +141,8 @@ void DungeonMap::Clear()
 
 }
 
-bool DungeonMap::Connect(RoomNode* room1, RoomNode* room2, EntryDirection entryDirection)
-{
+bool DungeonMap::Connect(RoomNode* room1, RoomNode* room2, EntryDirection entry)
+{   
+
     return false;
 }

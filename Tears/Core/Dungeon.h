@@ -42,7 +42,7 @@ struct RoomNode
     RoomNode* rightRoom = nullptr;
     RoomNode* bottomRoom = nullptr;
 
-    //
+    //방이 할당되었는지 플래그
     bool occupied = false;
     //방과 방끼리의 거리, -1로 초기화한것은 아직 값이 할당되지 않았음을 의미
     int distance = -1 ;
@@ -70,7 +70,7 @@ private:
     void Clear();
     
     //두 방 노드들을 연결하는 함수
-    bool Connect(RoomNode* room1, RoomNode* room2, EntryDirection entryDirection);
+    bool Connect(RoomNode* room1, RoomNode* room2, EntryDirection entry);
 
     //랜덤 방 방향 받아서 그에 맞는 좌표 offset 값 리턴하는 함수
     GridCoord GetOffset(EntryDirection entry);
