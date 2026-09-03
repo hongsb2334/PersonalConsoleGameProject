@@ -4,11 +4,34 @@
 #include <algorithm>
 bool DungeonMap::GenerateRoom(int roomNum, int maxRegenerateNum)
 {
+    //maxReGenerateNum 수만큼 방 생성
+    for (int i = 0; i < maxRegenerateNum; ++i)
+    {
+        //만약 성공적으로 
+        if (GenerateRoomOnce(roomNum))
+        {
+            return true;
+        }
+    }
+
     return false;
 }
 
 RoomNode* DungeonMap::FindRoom(const GridCoord& coord)
 {
+    //find를 하면 성공시 그 원소를, 아니면 iterator end를 반환
+    auto node = dungeon.find(coord);
+    if (node != dungeon.end())
+    {
+        //Todo: 존재는 하지만 아직 확정 생성된 방이 아닐 경우를 처리했지만 나중에 필요시 수정
+        if (!node->second.occupied)
+        {
+            return nullptr;
+        }
+        //second 값은 RoomNode
+        return &node->second;
+    }
+
     return nullptr;
 }
 
@@ -119,17 +142,19 @@ bool DungeonMap::GenerateRoomOnce(int roomNum)
         }
     }
 
-    //보스방이 시작 방과 바로 붙어있는지 확인
+    //원하는 방 수와 생성된 방 수가 다르면  
     if (roomCount != roomNum)
     {
         return false;
     }
 
-    //끝 방 리스트의 마지막 항복을 bossRoom으로 지정
+    //보스방이 시작 방과 바로 붙어있는지 확인
     if (endRoomList.empty())
     {
         return false;
     }
+
+    //끝 방 리스트의 마지막 항복을 bossRoom으로 지정
     bossRoom = endRoomList.back();
     return true;
 }
