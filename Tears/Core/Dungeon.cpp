@@ -136,14 +136,18 @@ bool DungeonMap::GenerateRoomOnce(int roomNum)
 
 void DungeonMap::Clear()
 {
-
-
-
+    //클리어 해야 할 목록
+    //dungeon, startRoom, bossRoom, endRoomList, roomCount
+    dungeon.clear();
+    startRoom = nullptr;
+    bossRoom = nullptr;
+    endRoomList.clear();
+    roomCount = 0;
 }
 
 bool DungeonMap::Connect(RoomNode* room1, RoomNode* room2, EntryDirection entry)
 {   
-    //entry를 받아서 room1 -> room2의 방향으로 방을 연결
+    //entry를 받아서 양방향으로 방 연결
     switch (entry)
     {
     case EntryDirection::None:
