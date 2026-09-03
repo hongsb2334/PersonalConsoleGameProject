@@ -143,6 +143,29 @@ void DungeonMap::Clear()
 
 bool DungeonMap::Connect(RoomNode* room1, RoomNode* room2, EntryDirection entry)
 {   
-
-    return false;
+    //entry를 받아서 room1 -> room2의 방향으로 방을 연결
+    switch (entry)
+    {
+    case EntryDirection::None:
+        return false;
+    case EntryDirection::Top:
+        room1->topRoom = room2;
+        room2->bottomRoom = room1;
+        break;
+    case EntryDirection::Bottom:
+        room1->bottomRoom = room2;
+        room2->topRoom = room1;
+        break;
+    case EntryDirection::Left:
+        room1->leftRoom = room2;
+        room2->rightRoom = room1;
+        break;
+    case EntryDirection::Right:
+        room1->rightRoom = room2;
+        room2->leftRoom = room1;
+        break;
+    default:
+        return false;
+    }
+    return true;
 }
