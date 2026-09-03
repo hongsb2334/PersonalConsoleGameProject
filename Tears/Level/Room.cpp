@@ -65,6 +65,16 @@ void Room::Draw()
     }
 }
 
+void Room::SpawnDoor()
+{
+    //Todo: 기존 Room3, Room4 등에서 사용하던 로직을 통합하기 위해 구현
+}
+
+void Room::SpawnEnemies()
+{
+    //Todo: SpawnEnemies를 별도 Room cpp들에서 구현했던걸 여기에 옮기고 시작방 스킵(노드 검사해서 startRoom이면 스킵하는 방식으로 구현)
+}
+
 void Room::SpawnPlayer()
 {
     //Player의 상태 가져오기

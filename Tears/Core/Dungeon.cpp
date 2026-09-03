@@ -98,7 +98,7 @@ bool DungeonMap::GenerateRoomOnce(int roomNum)
                 break;
             }
 
-            //방 방향에 맞는 offset값 받아서             
+            //방 방향에 맞는 offset값 받아서 좌표 계산
             GridCoord offset = GetOffset(entry);
             GridCoord newCoord = current->coord + offset;
             //unordered_map에서 newCoord의 키가 이미 존재하면 방이 이미 그 좌표에 생성되어 있는 것이기 때문에 방을 가져오고, 아니면 그 좌표에 RoomNode를 새로 생성
@@ -142,7 +142,7 @@ bool DungeonMap::GenerateRoomOnce(int roomNum)
         }
     }
 
-    //원하는 방 수와 생성된 방 수가 다르면  
+    //원하는 방 수와 생성된 방 수가 다르면 false 리턴 
     if (roomCount != roomNum)
     {
         return false;

@@ -15,11 +15,11 @@ public:
     virtual void Draw();
 
 protected:
-    //문 스폰하는 함수, 구현은 파생 클래스에서 함
-    virtual void SpawnDoor() {}
+    //문 스폰하는 함수, 공통 구현 
+    virtual void SpawnDoor();
 
-    //적 스폰하는 함수, 이전에 랜덤한 초마다 스폰하던 것과 달리 한번에 스폰, 구현은 파생 클래스에서 함
-    virtual void SpawnEnemies() {}
+    //적 스폰하는 함수, 이전에 랜덤한 초마다 스폰하던 것과 달리 한번에 스폰
+    virtual void SpawnEnemies();
 
     //플레이어 스폰
     void SpawnPlayer();

@@ -16,6 +16,7 @@ ResultLevel::ResultLevel(const std::string& title, Craft::Color titleColor, cons
         Item("Retry", []()
             {
                 Engine::Get().CreateGameInstance<RunState>();
+                Engine::Get().GetGameInstance<RunState>()->dungeonMap.GenerateRoom(12, 20);
                 Engine::Get().AddNewLevel<StartRoom>();
             }
         ),
