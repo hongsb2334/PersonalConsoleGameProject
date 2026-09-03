@@ -6,7 +6,7 @@ class StartRoom : public Room
 
 protected:
     virtual void OnInitialized() override;
-    virtual void SpawnDoor() override;
+    
 private:
 
 };

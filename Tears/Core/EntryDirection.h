@@ -9,12 +9,10 @@ enum class EntryDirection
     Right
 };
 
-EntryDirection GetOppositeDirection(EntryDirection entry)
+inline EntryDirection GetOppositeDirection(EntryDirection entry)
 {
     switch (entry)
     {
-    case EntryDirection::None:
-        break;
     case EntryDirection::Top:
         return EntryDirection::Bottom;
     case EntryDirection::Bottom:
@@ -24,7 +22,7 @@ EntryDirection GetOppositeDirection(EntryDirection entry)
     case EntryDirection::Right:
         return EntryDirection::Left;
     default:
-        break;
+        return EntryDirection::None;
     }
     
 }

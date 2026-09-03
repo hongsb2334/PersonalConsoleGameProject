@@ -28,6 +28,9 @@ void TitleLevel::Tick(float deltaTime)
     super::Tick(deltaTime);
     if (Input::Get().GetKeydown(VK_RETURN))
     {
+        //현재 방 포인터를 시작방으로 설정
+        std::shared_ptr<RunState> runState = Engine::Get().GetGameInstance<RunState>();
+        runState->currentRoom = runState->dungeonMap.GetStartRoom();
         Engine::Get().AddNewLevel<StartRoom>();
     }
 }

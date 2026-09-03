@@ -10,11 +10,11 @@
 using namespace Craft;
 
 
-Player::Player(int initialHp) : Damageable("ISSAC", Vector2::Zero, Color::Green, 10, initialHp), fireMode(FireMode::OneShot)
+Player::Player(int initialHp) : Damageable("ISSAC", Vector2::Zero, Color::Cyan, 10, initialHp), fireMode(FireMode::OneShot)
 {
     //생성 위치 설정
     int x = (Engine::Get().GetWidth() / 2) - (width / 2);
-    int y = (Engine::Get().GetHeight() - 2);
+    int y = (Engine::Get().GetHeight() / 2);
     SetPosition(Vector2(x, y));
 
     //x 위치 저장

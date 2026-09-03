@@ -14,8 +14,16 @@ public:
     virtual void Tick(float deltaTime);
     virtual void Draw();
 
+    struct DoorInfo
+    {
+        EntryDirection entryDirection;
+        RoomNode* neighbor;
+        Craft::Vector2 position;
+        DoorDirection doorDirection;
+    };
+
 protected:
-    //문 스폰하는 함수, 공통 구현 
+    //문 스폰하는 함수, 기존 Room3, Room4 등에서 사용하던 로직 통합 구현
     virtual void SpawnDoor();
 
     //적 스폰하는 함수, 이전에 랜덤한 초마다 스폰하던 것과 달리 한번에 스폰
@@ -51,14 +59,19 @@ protected:
     //Enemy의 수를 카운트하는 함수
     int CountAliveEnemies() const;
 
-    Craft::Vector2 GetEntryPosition(EntryDirection direction, int playerWidth) const;
+    Craft::Vector2 GetEntryPosition(EntryDirection direction, int playerWidth, int playerHeight) const;
 
 protected:
     std::vector<std::shared_ptr<Enemy>> spawnedEnemyList;
     std::vector<std::shared_ptr<Door>> doorList;
+
+    
+
     //Room 안의 적을 모두 처치했는지 플래그
     bool isCleared = false;
 
 private:
     Timer healItemTimer{ 5.0f };
+
+
 };

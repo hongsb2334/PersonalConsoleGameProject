@@ -42,16 +42,7 @@
     <ClInclude Include="Level\StartRoom.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Level\Room2.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Core\RunState.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Level\Room3.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Level\Room4.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Level\BossRoom.h">
@@ -114,15 +105,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Level\StartRoom.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Level\Room2.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Level\Room3.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Level\Room4.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Level\BossRoom.cpp">

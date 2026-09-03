@@ -104,9 +104,6 @@
     <ClInclude Include="Level\GameOverLevel.h" />
     <ClInclude Include="Level\ResultLevel.h" />
     <ClInclude Include="Level\Room.h" />
-    <ClInclude Include="Level\Room2.h" />
-    <ClInclude Include="Level\Room3.h" />
-    <ClInclude Include="Level\Room4.h" />
     <ClInclude Include="Level\StartRoom.h" />
     <ClInclude Include="Level\TitleLevel.h" />
     <ClInclude Include="Level\WinLevel.h" />
@@ -125,9 +122,6 @@
     <ClCompile Include="Level\BossRoom.cpp" />
     <ClCompile Include="Level\ResultLevel.cpp" />
     <ClCompile Include="Level\Room.cpp" />
-    <ClCompile Include="Level\Room2.cpp" />
-    <ClCompile Include="Level\Room3.cpp" />
-    <ClCompile Include="Level\Room4.cpp" />
     <ClCompile Include="Level\StartRoom.cpp" />
     <ClCompile Include="Level\TitleLevel.cpp" />
     <ClCompile Include="Main.cpp" />
