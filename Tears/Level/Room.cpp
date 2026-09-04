@@ -1,5 +1,6 @@
 ﻿#include "Room.h"
 #include "BossRoom.h"
+#include "StartRoom.h"
 #include <Actor/Player.h>
 #include <Actor/HealItem.h>
 #include <Engine/Engine.h>
@@ -17,10 +18,17 @@ void Room::OnInitialized()
     SpawnDoor();
     SpawnEnemies();
 
+    //현재 노드 가져온다
+    RoomNode* node = Engine::Get().GetGameInstance<RunState>()->currentRoom;
+    if (!node)
+    {
+        return;
+    }
+
     //시작 방은 적이 없으므로 바로 클리어 처리를 해서 문을 연다
     if (spawnedEnemyList.empty())
     {
-        isCleared = true;
+        node->isCleared = true;
         OnRoomCleared();
     }
 
@@ -29,9 +37,16 @@ void Room::OnInitialized()
 void Room::Tick(float deltaTime)
 {
     super::Tick(deltaTime);
-    
+
+    //현재 노드 가져와서
+    RoomNode* node = Engine::Get().GetGameInstance<RunState>()->currentRoom;
+    if (!node)
+    {
+        return;
+    }
+
     //기본 클리어 플래그 false로 시작해서 밑의 if문에서 플래그가 true로 바뀌면 리턴하여 판정 로직 반복안되게 하는 코드
-    if (isCleared)
+    if (node->isCleared)
     {
         return;
     }
@@ -49,7 +64,7 @@ void Room::Tick(float deltaTime)
 
     if (CountAliveEnemies() == 0)
     {
-        isCleared = true;
+        node->isCleared = true;
         OnRoomCleared();
     }
 }
@@ -74,6 +89,8 @@ void Room::SpawnDoor()
     //현재 방 불러와서
     RoomNode* current = runState->currentRoom;
     RoomNode* bossRoom = runState->dungeonMap.GetBossRoom();
+    RoomNode* startRoom = runState->dungeonMap.GetStartRoom();
+
     if (!current)
     {
         return;
@@ -102,13 +119,17 @@ void Room::SpawnDoor()
         EntryDirection entry = info.entryDirection;
         RoomNode* neighbor = info.neighbor;
 
-        TrackSpawnedDoor<Door>(info.position, [runState, entry, neighbor, bossRoom]()
+        TrackSpawnedDoor<Door>(info.position, [runState, entry, neighbor, bossRoom, startRoom]()
             {
                 runState->entryDirection = GetOppositeDirection(entry);
                 runState->currentRoom = neighbor;
                 if (neighbor == bossRoom)
                 {
                     Engine::Get().AddNewLevel<BossRoom>();
+                }
+                else if (neighbor == startRoom)
+                {
+                    Engine::Get().AddNewLevel<StartRoom>();
                 }
                 else
                 {
@@ -128,8 +149,9 @@ void Room::SpawnEnemies()
     RoomNode* current = Engine::Get().GetGameInstance<RunState>()->currentRoom;
     RoomNode* start = Engine::Get().GetGameInstance<RunState>()->dungeonMap.GetStartRoom();
     RoomNode* boss = Engine::Get().GetGameInstance<RunState>()->dungeonMap.GetBossRoom();
+    
     //시작 룸일 경우 적 스폰이 필요없으므로 스킵
-    if (current == start)
+    if (current == start || current->isCleared )
     {
         return;
     }

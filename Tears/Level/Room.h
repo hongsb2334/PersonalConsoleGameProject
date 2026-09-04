@@ -66,10 +66,6 @@ protected:
     std::vector<std::shared_ptr<Enemy>> spawnedEnemyList;
     std::vector<std::shared_ptr<Door>> doorList;
 
-    
-
-    //Room 안의 적을 모두 처치했는지 플래그
-    bool isCleared = false;
 
 private:
     Timer healItemTimer{ 5.0f };

@@ -44,8 +44,12 @@ struct RoomNode
 
     //방이 할당되었는지 플래그
     bool occupied = false;
+    
     //방과 방끼리의 거리, -1로 초기화한것은 아직 값이 할당되지 않았음을 의미
     int distance = -1 ;
+    
+    //Room 안의 적을 모두 처치했는지 플래그
+    bool isCleared = false;
 };
 
 class DungeonMap
