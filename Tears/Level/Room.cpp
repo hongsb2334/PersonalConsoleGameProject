@@ -45,7 +45,7 @@ void Room::Tick(float deltaTime)
         return;
     }
 
-    //기본 클리어 플래그 false로 시작해서 밑의 if문에서 플래그가 true로 바뀌면 리턴하여 판정 로직 반복안되게 하는 코드
+    //기본 클리어 플래그 false로 시작해서 플래그가 true로 바뀌면 리턴하여 판정 로직 반복안되게 하는 코드
     if (node->isCleared)
     {
         return;
@@ -112,6 +112,7 @@ void Room::SpawnDoor()
     
     for (const DoorInfo& info : doorInfo)
     {
+        //연결된 노드가 없거나 완전히 생성되지 않은 방이면 건너뜀
         if (!info.neighbor || !info.neighbor->occupied)
         {
             continue;
@@ -123,14 +124,17 @@ void Room::SpawnDoor()
             {
                 runState->entryDirection = GetOppositeDirection(entry);
                 runState->currentRoom = neighbor;
+                //보스룸이면 보스룸 생성
                 if (neighbor == bossRoom)
                 {
                     Engine::Get().AddNewLevel<BossRoom>();
                 }
+                //시작룸이면 시작룸 생성
                 else if (neighbor == startRoom)
                 {
                     Engine::Get().AddNewLevel<StartRoom>();
                 }
+                //나머지는 일반 룸 생성
                 else
                 {
                     Engine::Get().AddNewLevel<Room>();
