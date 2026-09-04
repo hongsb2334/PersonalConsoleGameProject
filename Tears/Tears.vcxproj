@@ -90,6 +90,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Actor\Boss.h" />
+    <ClInclude Include="Actor\ChaserEnemy.h" />
     <ClInclude Include="Actor\Damageable.h" />
     <ClInclude Include="Actor\Door.h" />
     <ClInclude Include="Actor\Enemy.h" />
@@ -97,6 +98,7 @@
     <ClInclude Include="Actor\HealItem.h" />
     <ClInclude Include="Actor\Player.h" />
     <ClInclude Include="Actor\PlayerProjectile.h" />
+    <ClInclude Include="Actor\WandererEnemy.h" />
     <ClInclude Include="Core\Dungeon.h" />
     <ClInclude Include="Core\EntryDirection.h" />
     <ClInclude Include="Core\RunState.h" />
@@ -112,12 +114,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Boss.cpp" />
+    <ClCompile Include="Actor\ChaserEnemy.cpp" />
     <ClCompile Include="Actor\Damageable.cpp" />
     <ClCompile Include="Actor\Door.cpp" />
     <ClCompile Include="Actor\Enemy.cpp" />
     <ClCompile Include="Actor\EnemyProjectile.cpp" />
     <ClCompile Include="Actor\HealItem.cpp" />
     <ClCompile Include="Actor\PlayerProjectile.cpp" />
+    <ClCompile Include="Actor\WandererEnemy.cpp" />
     <ClCompile Include="Core\Dungeon.cpp" />
     <ClCompile Include="Level\BossRoom.cpp" />
     <ClCompile Include="Level\ResultLevel.cpp" />

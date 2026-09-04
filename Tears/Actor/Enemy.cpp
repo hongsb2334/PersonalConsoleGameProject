@@ -27,36 +27,24 @@ void Enemy::Tick(float deltaTime)
 
 void Enemy::Move(float deltaTime)
 {
-    std::shared_ptr<Level> owner = GetOwner();
-    if (!owner)
-    {
-        return;
-    }
+    float dX = 0;
+    float dY = 0;
+    MovingPattern(dX, dY);
 
-    std::shared_ptr<Player> player = owner->FindActor<Player>();
-    if (!player)
-    {
-        return;
-    }
-
-    //정규화 로직
-    float dx = static_cast<float>(player->GetPosition().x - GetPosition().x);
-    float dy = static_cast<float>(player->GetPosition().y - GetPosition().y);
-    float length = std::sqrt(dx * dx + dy * dy);
-    if (length > 0.0f)
-    {
-        dx /= length;
-        dy /= length;
-    }
-
-    xPosition += dx * moveSpeed * deltaTime;
-    yPosition += dy * moveSpeed * deltaTime;
+    xPosition += dX * moveSpeed * deltaTime;
+    yPosition += dY * moveSpeed * deltaTime;
 
     //Player와 같은 로직
     Vector2 newPosition = GetPosition();
     newPosition.x = static_cast<int>(xPosition);
     newPosition.y = static_cast<int>(yPosition);
     SetPosition(newPosition);
+}
+
+void Enemy::MovingPattern(float& outDx, float& outDy) const
+{
+    outDx = 0.0f;
+    outDy = 0.0f;
 }
 
 void Enemy::Fire()

@@ -1,6 +1,8 @@
 ﻿#include "Room.h"
 #include "BossRoom.h"
 #include "StartRoom.h"
+#include <Actor/ChaserEnemy.h>
+#include <Actor/WandererEnemy.h>
 #include <Actor/Player.h>
 #include <Actor/HealItem.h>
 #include <Engine/Engine.h>
@@ -162,19 +164,31 @@ void Room::SpawnEnemies()
     //보스룸일 경우 일반 room과 다른 패턴의 적 사용
     else if (current == boss)
     {
-        //Todo: boss방 적 스폰 및 패턴 설정
-    }
-    else
-    {
-        int enemyCount = Util::RandomRange(3, 7);
+        int wandererEnemyCount = Util::RandomRange(0, 2);
 
-        for (int i = 0; i < enemyCount; i++)
+        //Todo: boss방 적 스폰 및 패턴 설정
+        for (int i = 0; i < wandererEnemyCount; i++)
         {
             //Todo: 화면 가장자리 짤리는 현상 일어날 수 있어 확인 필요
             int x = Util::RandomRange(1, Engine::Get().GetWidth() - 6);
             int y = Util::RandomRange(1, Engine::Get().GetHeight() - 6);
 
-            TrackSpawnedEnemy<Enemy>(Vector2(x, y));
+            TrackSpawnedEnemy<WandererEnemy>(Vector2(x, y));
+        }
+    }
+    else
+    {
+        int chaserEnemyCount = Util::RandomRange(3, 7);
+        
+
+        for (int i = 0; i < chaserEnemyCount; i++)
+        {
+            //Todo: 화면 가장자리 짤리는 현상 일어날 수 있어 확인 필요
+            int x = Util::RandomRange(1, Engine::Get().GetWidth() - 6);
+            int y = Util::RandomRange(1, Engine::Get().GetHeight() - 6);
+
+            TrackSpawnedEnemy<ChaserEnemy>(Vector2(x, y));
+            
         }
     }
 }

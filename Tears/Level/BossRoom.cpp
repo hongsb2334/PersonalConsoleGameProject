@@ -3,6 +3,7 @@
 #include <Util/Util.h>
 #include <Level/WinLevel.h>
 #include <Actor/Boss.h>
+#include <Actor/WandererEnemy.h>
 #include <Render/Renderer.h>
 using namespace Craft;
 
@@ -12,9 +13,12 @@ void BossRoom::SpawnDoor()
 
 void BossRoom::SpawnEnemies()
 {
+    //Todo: WandererEnemy가 보스전에서 출현하도록 구성, 후에 수정
     int x = Util::RandomRange(1, Engine::Get().GetWidth() - 6);
     int y = Util::RandomRange(1, Engine::Get().GetHeight() - 6);
-    TrackSpawnedEnemy<Boss>(Vector2(x, y));
+    //TrackSpawnedEnemy<Boss>(Vector2(x, y));
+    TrackSpawnedEnemy<WandererEnemy>(Vector2(x, y));
+    
 }
 
 void BossRoom::OnRoomCleared()
@@ -27,7 +31,8 @@ void BossRoom::Draw()
 {
     super::Draw();
 
-    std::shared_ptr<Boss> boss = FindActor<Boss>();
+    //std::shared_ptr<Boss> boss = FindActor<Boss>();
+    std::shared_ptr<WandererEnemy> boss = FindActor<WandererEnemy>();
     if (boss)
     {
         std::string bosshpText = "BOSS HP : " + std::to_string(boss->GetHp()) + " / " + std::to_string(boss->GetMaxHp());
