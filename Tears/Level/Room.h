@@ -59,6 +59,7 @@ protected:
     //Enemy의 수를 카운트하는 함수
     int CountAliveEnemies() const;
 
+    //플레이어 액터의 사이즈를 받아 
     Craft::Vector2 GetEntryPosition(EntryDirection direction, int playerWidth, int playerHeight) const;
 
 protected:

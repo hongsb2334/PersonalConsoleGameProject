@@ -17,62 +17,58 @@ namespace Craft
 		);
 
 		assert(buffer != INVALID_HANDLE_VALUE);
-        //콘솔 사이즈 구하는 코드
-        //COORD maxSize = GetLargestConsoleWindowSize(buffer);
-        //std::cout << "Max console size - X: " << maxSize.X << ", Y: " << maxSize.Y << std::endl;
-        //std::cin.get();
-      
-        //// 1단계: 창을 먼저 아주 작게 줄여서, 버퍼보다 항상 작거나 같게 만든다
-        //SMALL_RECT minRect = { 0, 0, 1, 1 };
-        //SetConsoleWindowInfo(buffer, TRUE, &minRect);
+        
+        // 1단계: 창을 먼저 아주 작게 줄여서, 버퍼보다 항상 작거나 같게 만든다
+        SMALL_RECT minRect = { 0, 0, 1, 1 };
+        SetConsoleWindowInfo(buffer, TRUE, &minRect);
 
-        //// 2단계: 버퍼 크기를 원하는 크기(80x40)로 설정
-        //BOOL result = SetConsoleScreenBufferSize(buffer, size);
-        //assert(result == TRUE);
+        // 2단계: 버퍼 크기를 원하는 크기로 설정
+        BOOL result = SetConsoleScreenBufferSize(buffer, size);
+        assert(result == TRUE);
 
-        //// 3단계: 이제 버퍼가 충분히 크므로, 창을 최종 크기로 설정 (성공함)
-        //SMALL_RECT rect = {};
-        //rect.Top = 0;
-        //rect.Left = 0;
-        //rect.Right = static_cast<short>(size.x - 1);
-        //rect.Bottom = static_cast<short>(size.y - 1);
-        //result = SetConsoleWindowInfo(buffer, TRUE, &rect);
-        //assert(result == TRUE);
+        // 3단계: 이제 버퍼가 충분히 크므로, 창을 최종 크기로 설정 (성공함)
+        SMALL_RECT rect = {};
+        rect.Top = 0;
+        rect.Left = 0;
+        rect.Right = static_cast<short>(size.x - 1);
+        rect.Bottom = static_cast<short>(size.y - 1);
+        result = SetConsoleWindowInfo(buffer, TRUE, &rect);
+        assert(result == TRUE);
 
-        //// 커서 숨기기 (기존 코드 동일)
-        //CONSOLE_CURSOR_INFO info;
-        //result = GetConsoleCursorInfo(buffer, &info);
-        //assert(result == TRUE);
-        //info.bVisible = FALSE;
-        //result = SetConsoleCursorInfo(buffer, &info);
-        //assert(result == TRUE);
+        // 커서 숨기기 (기존 코드 동일)
+        CONSOLE_CURSOR_INFO info;
+        result = GetConsoleCursorInfo(buffer, &info);
+        assert(result == TRUE);
+        info.bVisible = FALSE;
+        result = SetConsoleCursorInfo(buffer, &info);
+        assert(result == TRUE);
 
 
 
-		//화면 창 크기 설정, 이 코드에서 창 크기를 80*40으로 설정한 후 
-		SMALL_RECT rect = {};
-		rect.Top = 0;
-		rect.Left = 0;
-		rect.Right = static_cast<short>(size.x - 1);
-		rect.Bottom = static_cast<short>(size.y - 1);
-		BOOL result = SetConsoleWindowInfo(buffer, TRUE, &rect);
+		////화면 창 크기 설정, 이 코드에서 창 크기를 원하는 크기로 설정한 후 
+		//SMALL_RECT rect = {};
+		//rect.Top = 0;
+		//rect.Left = 0;
+		//rect.Right = static_cast<short>(size.x - 1);
+		//rect.Bottom = static_cast<short>(size.y - 1);
+		//BOOL result = SetConsoleWindowInfo(buffer, TRUE, &rect);
 
-		//결과 확인
-		assert(result == TRUE);
+		////결과 확인
+		//assert(result == TRUE);
 
-		//화면 버퍼 크기 설정
-		result = SetConsoleScreenBufferSize(buffer, size);
-		assert(result == TRUE);
+		////화면 버퍼 크기 설정
+		//result = SetConsoleScreenBufferSize(buffer, size);
+		//assert(result == TRUE);
 
-		//직접 만든 콘솔의 커서 끄기
-		CONSOLE_CURSOR_INFO info;
-		result = GetConsoleCursorInfo(buffer, &info);
-		assert(result == TRUE);
+		////직접 만든 콘솔의 커서 끄기
+		//CONSOLE_CURSOR_INFO info;
+		//result = GetConsoleCursorInfo(buffer, &info);
+		//assert(result == TRUE);
 
-		//커서 안보이게 설정
-		info.bVisible = FALSE;
-		result = SetConsoleCursorInfo(buffer, &info);
-		assert(result == TRUE);
+		////커서 안보이게 설정
+		//info.bVisible = FALSE;
+		//result = SetConsoleCursorInfo(buffer, &info);
+		//assert(result == TRUE);
 
 	}
 	ScreenBuffer::~ScreenBuffer()

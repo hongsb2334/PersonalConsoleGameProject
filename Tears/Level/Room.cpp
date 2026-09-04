@@ -83,7 +83,7 @@ void Room::SpawnDoor()
     Vector2 topDoorPosition(Engine::Get().GetWidth() / 2 - (Door::doorLength / 2), 0);
     Vector2 bottomDoorPosition(Engine::Get().GetWidth() / 2 - (Door::doorLength / 2), Engine::Get().GetHeight() - 1);
     Vector2 rightDoorPosition(Engine::Get().GetWidth() - 1, Engine::Get().GetHeight() / 2 - (Door::doorLength / 2));
-    Vector2 leftDoorPosition(1, Engine::Get().GetHeight() / 2 - (Door::doorLength / 2));
+    Vector2 leftDoorPosition(0, Engine::Get().GetHeight() / 2 - (Door::doorLength / 2));
 
     std::vector<DoorInfo> doorInfo = {
         {EntryDirection::Top, current->topRoom, topDoorPosition, DoorDirection::Horizontal},
@@ -194,7 +194,7 @@ int Room::CountAliveEnemies() const
 Vector2 Room::GetEntryPosition(EntryDirection direction, int playerWidth, int playerHeight) const
 {
     int halfWidth = playerWidth / 2;
-    //Todo: 지금은 Player가 한 줄이라 halfHeight 의미가 없다
+    //Todo: 지금은 PlayerHeight가 한 줄이라 halfHeight 의미가 없다.
     int halfHeight = playerHeight / 2;
 
     switch (direction)
@@ -206,7 +206,7 @@ Vector2 Room::GetEntryPosition(EntryDirection direction, int playerWidth, int pl
     case EntryDirection::Left:
         return Vector2(1, Engine::Get().GetHeight() / 2 - halfHeight);
     case EntryDirection::Right:
-        return Vector2(Engine::Get().GetWidth() - 2, Engine::Get().GetHeight() / 2 - halfHeight);
+        return Vector2(Engine::Get().GetWidth() - playerWidth - 1, Engine::Get().GetHeight() / 2 - halfHeight);
     case EntryDirection::None:
     default:
         //시작 방에서는 EntryDirection이 기본 None으로 설정되어 있어 default 까지 내려오게 설정, 이렇게 하면 시작 방에서 중앙에 스폰됨
