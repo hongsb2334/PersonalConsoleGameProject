@@ -81,6 +81,9 @@
     <ClInclude Include="Actor\WandererEnemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Actor\OrbiterEnemy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Player.cpp">
@@ -138,6 +141,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Actor\WandererEnemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\OrbiterEnemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -17,7 +17,7 @@ ResultLevel::ResultLevel(const std::string& title, Craft::Color titleColor, cons
             {
                 Engine::Get().CreateGameInstance<RunState>();
                 std::shared_ptr<RunState> runState = Engine::Get().GetGameInstance<RunState>();
-                runState->dungeonMap.GenerateRoom(12, 20);
+                runState->dungeonMap.GenerateRoom(4, 20);
                 runState->currentRoom = runState->dungeonMap.GetStartRoom();
                 Engine::Get().AddNewLevel<StartRoom>();
             }

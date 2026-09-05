@@ -17,8 +17,9 @@ int main()
     Craft::Engine engine;
     engine.CreateGameInstance<RunState>();
     engine.AddNewLevel<TitleLevel>();
-    //둘 중 하나로 호출
-    engine.GetGameInstance<RunState>()->dungeonMap.GenerateRoom(12, 20);
+    //둘 중 하나로 호출, 방 생성 함수
+    //Todo: 방 생성 함수 수정 필요(기본 12, 20이 적당함)
+    engine.GetGameInstance<RunState>()->dungeonMap.GenerateRoom(4, 20);
     //Craft::Engine::Get().GetGameInstance<RunState>()->dungeonMap.GenerateRoom(12, 20);
     engine.Run();
 }
