@@ -87,6 +87,9 @@
     <ClInclude Include="Actor\ChargerEnemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Actor\Obstacle.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Player.cpp">
@@ -150,6 +153,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Actor\ChargerEnemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor\Obstacle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

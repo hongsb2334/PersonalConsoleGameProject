@@ -72,6 +72,7 @@ bool DungeonMap::GenerateRoomOnce(int roomNum)
     this->startRoom = &dungeon[GridCoord(0, 0)];
     startRoom->occupied = true;
     startRoom->distance = 0;
+    startRoom->roomSeed = Util::GetRandomEngine()();
     roomQueue.push(startRoom);
     roomCount = 1;
 
@@ -128,6 +129,7 @@ bool DungeonMap::GenerateRoomOnce(int roomNum)
             //여기까지 통과했으면 방 생성
             newRoom.occupied = true;
             newRoom.distance = current->distance + 1;
+            newRoom.roomSeed = Util::GetRandomEngine()();
             //방 연결
             Connect(current, &newRoom, entry);
             roomQueue.push(&newRoom);

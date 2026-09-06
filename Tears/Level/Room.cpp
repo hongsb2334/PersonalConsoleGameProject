@@ -9,6 +9,7 @@
 #include <Render/Renderer.h>
 #include <Util/Util.h>
 #include <Input/Input.h>
+#include <Actor/Obstacle.h>
 #include <Windows.h>
 using namespace Craft;
 static bool showRoomGrid = false;
@@ -21,8 +22,10 @@ void Room::OnInitialized()
     
     SpawnPlayer();
     SpawnDoor();
+    SpawnObstacles();
     BuildRoomGrid();
     SpawnEnemies();
+
 
     //현재 노드 가져온다
     RoomNode* node = Engine::Get().GetGameInstance<RunState>()->currentRoom;
@@ -193,6 +196,8 @@ void Room::SpawnEnemies()
             //Todo: 화면 가장자리 짤리는 현상 일어날 수 있어 확인 필요
             int x = Util::RandomRange(1, Engine::Get().GetWidth() - 6);
             int y = Util::RandomRange(1, Engine::Get().GetHeight() - 6);
+            //만약 적이 스폰될 위치가 
+            if (IsBlocked(x, y)) { --i; continue; }
 
             TrackSpawnedEnemy<WandererEnemy>(Vector2(x, y));
         }
@@ -201,13 +206,13 @@ void Room::SpawnEnemies()
     {
         int chaserEnemyCount = Util::RandomRange(3, 7);
         
-
         for (int i = 0; i < chaserEnemyCount; i++)
         {
             //Todo: 화면 가장자리 짤리는 현상 일어날 수 있어 확인 필요
             int x = Util::RandomRange(1, Engine::Get().GetWidth() - 6);
             int y = Util::RandomRange(1, Engine::Get().GetHeight() - 6);
-
+            //만약 적이 스폰될 위치가 obstacle의 위치라면 재추첨
+            if (IsBlocked(x, y)) { --i; continue; }
             TrackSpawnedEnemy<ChaserEnemy>(Vector2(x, y));
             
         }
@@ -226,6 +231,54 @@ void Room::SpawnPlayer()
 
     //한 방에서 사용한 진입 위치 값은 다음 방에서 사용하기 위해 초기화
     runState->entryDirection = EntryDirection::None;
+}
+
+void Room::SpawnObstacles()
+{
+    std::shared_ptr<RunState> runState = Engine::Get().GetGameInstance<RunState>();
+
+    //현재 노드와 시작 룸 불러오기
+    RoomNode* current = Engine::Get().GetGameInstance<RunState>()->currentRoom;
+    RoomNode* start = Engine::Get().GetGameInstance<RunState>()->dungeonMap.GetStartRoom();
+    RoomNode* boss = Engine::Get().GetGameInstance<RunState>()->dungeonMap.GetBossRoom();
+
+    //시작 룸일 경우 obstacle 스폰이 필요없으므로 스킵
+    if (!current || !start || !boss || current == start )
+    {
+        return;
+    }
+
+   
+
+    std::mt19937 rng(current->roomSeed);
+
+    auto randRange = [&rng](int low, int high)
+        {
+            return std::uniform_int_distribution<int>(low, high)(rng);
+        };
+
+    int width = Engine::Get().GetWidth();
+    int height = Engine::Get().GetHeight();
+
+    const int xMin = width / 4;
+    const int xMax = width - width / 4;
+    const int yMin = height / 4;
+    const int yMax = height - height / 4;
+
+    int count = randRange(3, 6);
+    for (int i = 0; i < count; i++)
+    {
+        int tileW = randRange(3, 7);
+        int tileH = randRange(3, 6);
+
+        int ox = randRange(xMin, xMax - tileW);
+        int oy = randRange(yMin, yMax - tileH);
+
+        TrackSpawnedObstacle<Obstacle>(Vector2(ox, oy), tileW, tileH);
+    }
+
+    
+
 }
 
 void Room::OnRoomCleared()
@@ -249,7 +302,7 @@ void Room::BuildRoomGrid()
 
     for (int x = 0; x < gridW; ++x)
     {
-        //테두리 윗 줄과 아랫줄 은 1넣음 (0은 이동 가능, 0은 이동 불가)
+        //테두리 윗 줄과 아랫줄 은 1넣음 (0은 이동 가능, 1은 이동 불가)
         roomGrid[Index(x, 0)] = 1;
         roomGrid[Index(x, gridH - 1)] = 1;
     }
@@ -257,6 +310,25 @@ void Room::BuildRoomGrid()
     {
         roomGrid[Index(0, y)] = 1;
         roomGrid[Index(gridW - 1, y)] = 1;
+    }
+
+    for (const std::shared_ptr<Obstacle>& obstacle : obstacleList)
+    {
+        //장애물의 위치
+        int ox = obstacle->GetPosition().x;
+        int oy= obstacle->GetPosition().y;
+        //장애물의 가로, 세로 길이
+        int ow = obstacle->GetWidth();
+        int oh = obstacle->GetHeight();
+
+        for (int y = oy; y < oy + oh; ++y)
+        {
+            for (int x = ox; x < ox + ow; ++x)
+            {
+                //만약 테두리를 넘어가면 건너뜀.
+                if (x < 0 || x >= gridW || y < 0 || y >= gridH) continue;
+            }
+        }
     }
 }
 

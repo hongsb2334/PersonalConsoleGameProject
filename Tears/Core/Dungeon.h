@@ -50,6 +50,9 @@ struct RoomNode
     
     //Room 안의 적을 모두 처치했는지 플래그
     bool isCleared = false;
+
+    //장애물 배치 시드 (재입장 시 유지되고, 게임 실행때마다 변경되는 것 구현 위해 시드 설정)
+    unsigned roomSeed = 0;
 };
 
 class DungeonMap

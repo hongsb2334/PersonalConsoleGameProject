@@ -97,6 +97,7 @@
     <ClInclude Include="Actor\Enemy.h" />
     <ClInclude Include="Actor\EnemyProjectile.h" />
     <ClInclude Include="Actor\HealItem.h" />
+    <ClInclude Include="Actor\Obstacle.h" />
     <ClInclude Include="Actor\OrbiterEnemy.h" />
     <ClInclude Include="Actor\Player.h" />
     <ClInclude Include="Actor\PlayerProjectile.h" />
@@ -123,6 +124,7 @@
     <ClCompile Include="Actor\Enemy.cpp" />
     <ClCompile Include="Actor\EnemyProjectile.cpp" />
     <ClCompile Include="Actor\HealItem.cpp" />
+    <ClCompile Include="Actor\Obstacle.cpp" />
     <ClCompile Include="Actor\OrbiterEnemy.cpp" />
     <ClCompile Include="Actor\PlayerProjectile.cpp" />
     <ClCompile Include="Actor\WandererEnemy.cpp" />

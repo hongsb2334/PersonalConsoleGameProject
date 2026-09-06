@@ -2,6 +2,7 @@
 #include <Level/Level.h>
 #include <Actor/Enemy.h>
 #include <Actor/Door.h>
+#include <Actor/Obstacle.h>
 #include <Core/RunState.h>
 #include <Util/Timer.h>
 #include <cstdint>
@@ -33,6 +34,9 @@ protected:
     //플레이어 스폰
     void SpawnPlayer();
 
+    //obstacle 스폰
+    void SpawnObstacles();
+
     //방 클리어시 호출(클리어 후 등록된 문 활성화)
     virtual void OnRoomCleared();
     
@@ -50,12 +54,21 @@ protected:
     template <typename T, typename ...Args, typename = std::enable_if_t<std::is_base_of<Door, T>::value>>
     std::shared_ptr<T> TrackSpawnedDoor(Args&& ...args)
     {
-        //spaw
         std::shared_ptr<T> door = SpawnActor<T>(std::forward<Args>(args)...);
         doorList.push_back(door);
         return door;
     }
 
+    //Obstacle을 스폰하고 추적하는 코드
+    template <typename T, typename ...Args, typename = std::enable_if_t<std::is_base_of<Obstacle, T>::value>>
+    std::shared_ptr<T> TrackSpawnedObstacle(Args&& ...args)
+    {
+        std::shared_ptr<T> obstacle = SpawnActor<T>(std::forward<Args>(args)...);
+        obstacleList.push_back(obstacle);
+        return obstacle;
+    }
+
+    //방을 그리드로 만들기 (이동 가능하면 0, 불가능하면 1)
     void BuildRoomGrid();
 
     bool IsBlocked(int x, int y) const;
@@ -72,6 +85,8 @@ protected:
 protected:
     std::vector<std::shared_ptr<Enemy>> spawnedEnemyList;
     std::vector<std::shared_ptr<Door>> doorList;
+    std::vector<std::shared_ptr<Obstacle>> obstacleList;
+
 
     //방 내부의 그리드
     std::vector<uint8_t> roomGrid;
