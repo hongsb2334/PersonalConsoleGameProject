@@ -26,6 +26,7 @@ public:
 
 private:
     Timer timer;
+    //접촉 후 0.5초의 무적 주기 설정
     Timer hitCoolDown{ 0.5f };
 
     //돌진할 방향

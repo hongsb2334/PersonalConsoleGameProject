@@ -4,6 +4,7 @@
 #include <Actor/Door.h>
 #include <Core/RunState.h>
 #include <Util/Timer.h>
+#include <cstdint>
 
 class Room : public Craft::Level
 {
@@ -54,6 +55,12 @@ protected:
         doorList.push_back(door);
         return door;
     }
+
+    void BuildRoomGrid();
+
+    bool IsBlocked(int x, int y) const;
+    
+    inline int Index(int x, int y) const { return y * gridW + x; }
     
 protected:
     //Enemy의 수를 카운트하는 함수
@@ -66,9 +73,16 @@ protected:
     std::vector<std::shared_ptr<Enemy>> spawnedEnemyList;
     std::vector<std::shared_ptr<Door>> doorList;
 
+    //방 내부의 그리드
+    std::vector<uint8_t> roomGrid;
+    int gridW = 0;
+    int gridH = 0;
+    
+
+
 
 private:
     Timer healItemTimer{ 5.0f };
 
-
+    
 };

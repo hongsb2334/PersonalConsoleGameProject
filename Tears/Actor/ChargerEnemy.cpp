@@ -124,8 +124,9 @@ void ChargerEnemy::Tick(float deltaTime)
 void ChargerEnemy::OnCollision(const std::shared_ptr<Craft::Actor>& other)
 {
     super::OnCollision(other);
-
+    //대시 상태가 아니면 데미지 x
     if (currentState != Dash) return;
+    //중복 데미지를 막기 위해 쿨다운 상태가 아니면 리턴
     if (!hitCoolDown.IsTimeOut()) return;
 
     if (auto player = Cast<Player>(other))

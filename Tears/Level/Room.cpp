@@ -8,16 +8,20 @@
 #include <Engine/Engine.h>
 #include <Render/Renderer.h>
 #include <Util/Util.h>
+#include <Input/Input.h>
+#include <Windows.h>
 using namespace Craft;
+static bool showRoomGrid = false;
 
 void Room::OnInitialized()
 {
     super::OnInitialized();
-
+    
     Engine::Get().PlayBackGroundMusic("BackGroundMusic.wav");
-
+    
     SpawnPlayer();
     SpawnDoor();
+    BuildRoomGrid();
     SpawnEnemies();
 
     //현재 노드 가져온다
@@ -46,6 +50,8 @@ void Room::Tick(float deltaTime)
     {
         return;
     }
+    
+    if (Input::Get().GetKeydown('G')) showRoomGrid = !showRoomGrid;
 
     //기본 클리어 플래그 false로 시작해서 플래그가 true로 바뀌면 리턴하여 판정 로직 반복안되게 하는 코드
     if (node->isCleared)
@@ -74,6 +80,21 @@ void Room::Tick(float deltaTime)
 void Room::Draw()
 {
     super::Draw();
+
+    if (showRoomGrid)
+    {
+        for (int y = 0; y < gridH; ++y)
+        {
+            for (int x = 0; x < gridW; ++x)
+            {
+                //테두리면
+                if (roomGrid[Index(x, y)] != 0)
+                {
+                    Renderer::Get().Submit("#", Vector2(x, y), Color::Purple, 5);
+                }
+            }
+        }
+    }
 
     std::shared_ptr<Player> player = FindActor<Player>();
     if (player)
@@ -216,6 +237,37 @@ void Room::OnRoomCleared()
             door->Open();
         }
     }
+}
+
+void Room::BuildRoomGrid()
+{
+    gridW = Engine::Get().GetWidth();
+    gridH = Engine::Get().GetHeight();
+
+    //콘솔 크기만큼 0 채우기
+    roomGrid.assign(gridW * gridH, 0);
+
+    for (int x = 0; x < gridW; ++x)
+    {
+        //테두리 윗 줄과 아랫줄 은 1넣음 (0은 이동 가능, 0은 이동 불가)
+        roomGrid[Index(x, 0)] = 1;
+        roomGrid[Index(x, gridH - 1)] = 1;
+    }
+    for (int y = 0; y < gridH; ++y)
+    {
+        roomGrid[Index(0, y)] = 1;
+        roomGrid[Index(gridW - 1, y)] = 1;
+    }
+}
+
+bool Room::IsBlocked(int x, int y) const
+{
+    //범위 밖 넘어가면 true 리턴, 아니면 실제 격자가 이동 불가능한지 여부 리턴
+    if (x < 0 || x >= gridW || y < 0 || y >= gridH)
+    {
+        return true;
+    }
+    return roomGrid[(Index(x, y))] != 0;
 }
 
 int Room::CountAliveEnemies() const
