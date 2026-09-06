@@ -10,6 +10,7 @@ ChargerEnemy::ChargerEnemy(const Craft::Vector2& position, int maxHp, int damage
     
     baseSpeed = moveSpeed;
     timer.SetTargetTime(idleTime);
+    hitCoolDown.SetTargetTime(0.0f);
 }
 
 void ChargerEnemy::MovingPattern(float& outDx, float& outDy) const
@@ -27,6 +28,7 @@ void ChargerEnemy::Tick(float deltaTime)
 {
     super::Tick(deltaTime);
     timer.Tick(deltaTime);
+    hitCoolDown.Tick(deltaTime);
 
     if (timer.IsTimeOut())
     {
@@ -79,14 +81,14 @@ void ChargerEnemy::Tick(float deltaTime)
     //벽 클램프 처리를 위한 변수
     bool hitWall = false;
 
-    //x값이 0보다 작아지면 0으로 클램프 후 부호 바꿔서 반대로 진행하게 함
+    //x값이 0보다 작아지면 0으로 클램프
     if (xPosition < 0)
     {
         xPosition = 0.0f;
         hitWall = true;
     }
-    //x값과 가로 길이 더한게 창 넘어가면 창에서 글자 길이 빼서 클램프 해주고 방향 반대 설정
-    if (xPosition + width >= Engine::Get().GetWidth())
+    //x값과 가로 길이 더한게 창 넘어가면 창에서 글자 길이 빼서 클램프
+    if (xPosition + width > Engine::Get().GetWidth())
     {
         xPosition = Engine::Get().GetWidth() - width;
         hitWall = true;
@@ -98,7 +100,7 @@ void ChargerEnemy::Tick(float deltaTime)
         hitWall = true;
     }
     //Todo: x값이랑 똑같은데 현재 height는 1이다, 나중에 2차원 액터 사용시 수정 필요
-    if (yPosition + height >= Engine::Get().GetHeight())
+    if (yPosition + height > Engine::Get().GetHeight())
     {
         yPosition = Engine::Get().GetHeight() - height;
         hitWall = true;
@@ -117,6 +119,22 @@ void ChargerEnemy::Tick(float deltaTime)
         timer.SetTargetTime(idleTime);
         timer.Reset();
     }   
+}
+
+void ChargerEnemy::OnCollision(const std::shared_ptr<Craft::Actor>& other)
+{
+    super::OnCollision(other);
+
+    if (currentState != Dash) return;
+    if (!hitCoolDown.IsTimeOut()) return;
+
+    if (auto player = Cast<Player>(other))
+    {
+        player->TakeDamage(2);
+        hitCoolDown.SetTargetTime(0.5f);
+        hitCoolDown.Reset();
+    }
+
 }
 
 void ChargerEnemy::Fire()

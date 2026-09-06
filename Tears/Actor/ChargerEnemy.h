@@ -9,6 +9,7 @@ public:
 
     virtual void MovingPattern(float& outDx, float& outDy) const override;
     virtual void Tick(float deltaTime) override;
+    virtual void OnCollision(const std::shared_ptr<Craft::Actor>& other) override;
 
     //돌진형 적은 발사를 안할거라서 빈 함수로 오버라이드
     virtual void Fire() override;
@@ -25,6 +26,7 @@ public:
 
 private:
     Timer timer;
+    Timer hitCoolDown{ 0.5f };
 
     //돌진할 방향
     float dashDirX;

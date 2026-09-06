@@ -45,7 +45,7 @@ void WandererEnemy::Tick(float deltaTime)
         currentDx *= -1;
     }
     //x값과 가로 길이 더한게 창 넘어가면 창에서 글자 길이 빼서 클램프 해주고 방향 반대 설정
-    if (xPosition + width >= Engine::Get().GetWidth())
+    if (xPosition + width > Engine::Get().GetWidth())
     {
         xPosition = Engine::Get().GetWidth() - width;
         currentDx *= -1;
@@ -57,7 +57,7 @@ void WandererEnemy::Tick(float deltaTime)
         currentDy *= -1;
     }
     //Todo: x값이랑 똑같은데 현재 height는 1이다, 나중에 2차원 액터 사용시 수정 필요
-    if (yPosition + height >= Engine::Get().GetHeight())
+    if (yPosition + height > Engine::Get().GetHeight())
     {
         yPosition = Engine::Get().GetHeight() - height;
         currentDy *= -1;
