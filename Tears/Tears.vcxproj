@@ -102,6 +102,7 @@
     <ClInclude Include="Actor\Player.h" />
     <ClInclude Include="Actor\PlayerProjectile.h" />
     <ClInclude Include="Actor\WandererEnemy.h" />
+    <ClInclude Include="AStar\AStar.h" />
     <ClInclude Include="Core\Dungeon.h" />
     <ClInclude Include="Core\EntryDirection.h" />
     <ClInclude Include="Core\RunState.h" />
@@ -128,6 +129,7 @@
     <ClCompile Include="Actor\OrbiterEnemy.cpp" />
     <ClCompile Include="Actor\PlayerProjectile.cpp" />
     <ClCompile Include="Actor\WandererEnemy.cpp" />
+    <ClCompile Include="AStar\AStar.cpp" />
     <ClCompile Include="Core\Dungeon.cpp" />
     <ClCompile Include="Level\BossRoom.cpp" />
     <ClCompile Include="Level\ResultLevel.cpp" />

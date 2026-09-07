@@ -191,8 +191,9 @@ namespace Craft
 		//렌더 큐 비우기 (그리기가 끝났으므로)
 		renderQueue.clear();
 
-		//콘솔 색상 초기화
-		SetConsoleTextAttribute(GetCurrentBuffer()->GetBuffer(), static_cast<DWORD>(Color::White));
+
+        //Todo: SetConsoleTextAttribute 제거하고 Renderer::Submit으로 프레임 단위 배치 렌더링으로 교체
+	
 	}
 	void Renderer::Present()
 	{

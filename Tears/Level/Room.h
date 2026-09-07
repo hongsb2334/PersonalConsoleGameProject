@@ -24,6 +24,8 @@ public:
         DoorDirection doorDirection;
     };
 
+    bool IsBlocked(int x, int y) const;
+
 protected:
     //문 스폰하는 함수, 기존 Room3, Room4 등에서 사용하던 로직 통합 구현
     virtual void SpawnDoor();
@@ -71,8 +73,6 @@ protected:
     //방을 그리드로 만들기 (이동 가능하면 0, 불가능하면 1)
     void BuildRoomGrid();
 
-    bool IsBlocked(int x, int y) const;
-    
     inline int Index(int x, int y) const { return y * gridW + x; }
     
 protected:

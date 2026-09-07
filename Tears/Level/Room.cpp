@@ -327,6 +327,8 @@ void Room::BuildRoomGrid()
             {
                 //만약 테두리를 넘어가면 건너뜀.
                 if (x < 0 || x >= gridW || y < 0 || y >= gridH) continue;
+
+                roomGrid[Index(x, y)] = 1;
             }
         }
     }
