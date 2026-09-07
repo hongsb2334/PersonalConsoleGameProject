@@ -6,6 +6,7 @@
 #include <Actor/WandererEnemy.h>
 #include <Actor/OrbiterEnemy.h>
 #include <Actor/ChargerEnemy.h>
+#include <Actor/AStarEnemy.h>
 #include <Render/Renderer.h>
 using namespace Craft;
 
@@ -15,12 +16,15 @@ void BossRoom::SpawnDoor()
 
 void BossRoom::SpawnEnemies()
 {
-    //Todo: ChargerEnemy가 보스전에서 출현하도록 구성, 후에 수정
-    int x = Util::RandomRange(1, Engine::Get().GetWidth() - 6);
-    int y = Util::RandomRange(1, Engine::Get().GetHeight() - 6);
-    //TrackSpawnedEnemy<Boss>(Vector2(x, y));
-    TrackSpawnedEnemy<ChargerEnemy>(Vector2(x, y));
-    
+    int orbiterEnemyCount = Util::RandomRange(1, 3);
+    int wandererEnemyCount = Util::RandomRange(1, 3);
+    int AStarEnemyCount = Util::RandomRange(1, 3);
+    int BossCount = 1;
+
+    SpawnEnemyRandomly<OrbiterEnemy>(orbiterEnemyCount);
+    SpawnEnemyRandomly<WandererEnemy>(wandererEnemyCount);
+    SpawnEnemyRandomly<AStarEnemy>(AStarEnemyCount);
+    SpawnEnemyRandomly<Boss>(BossCount);   
 }
 
 void BossRoom::OnRoomCleared()
@@ -33,8 +37,8 @@ void BossRoom::Draw()
 {
     super::Draw();
 
-    //std::shared_ptr<Boss> boss = FindActor<Boss>();
-    std::shared_ptr<ChargerEnemy> boss = FindActor<ChargerEnemy>();
+    //보스 찾아서 보스 체력 표시
+    std::shared_ptr<Boss> boss = FindActor<Boss>();
     if (boss)
     {
         std::string bosshpText = "BOSS HP : " + std::to_string(boss->GetHp()) + " / " + std::to_string(boss->GetMaxHp());

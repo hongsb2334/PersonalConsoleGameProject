@@ -7,7 +7,6 @@ using namespace Craft;
 ChargerEnemy::ChargerEnemy(const Craft::Vector2& position, int maxHp, int damage) : Enemy(position, maxHp, damage), dashDirX(0.0f), dashDirY(0.0f)
 {
     ChangeImage("Charger");
-    
     baseSpeed = moveSpeed;
     timer.SetTargetTime(idleTime);
     hitCoolDown.SetTargetTime(0.0f);

@@ -7,9 +7,9 @@ WandererEnemy::WandererEnemy(const Craft::Vector2& position, int maxHp, int dama
 {
     ChangeImage("Wanderer");
     //Todo: 색깔도 바꾸는 로직 추가
-    
+    color = Color::Purple;
     //4초가 지나면 방향 무작위로 뽑아서 이동하게 구현
-    timer.SetTargetTime(2.0f);
+    timer.SetTargetTime(1.5f);
 }
 
 //MovingPattern은 const라 멤버변수 currentDx, currentDy 못바꾼다. Tick에서 랜덤 방향 계산해서 여기에 넘겨줌

@@ -13,14 +13,15 @@ public:
     virtual void MovingPattern(float& outDx, float& outDy) const override;
     virtual void Tick(float deltaTime) override;
 
-    
-
+    //
+    static constexpr int spawnWidth = 8;
 private:
     //현재 이동중인 방향
     float currentDx;
     float currentDy;
 
     Timer timer;
+    
     
 
 };

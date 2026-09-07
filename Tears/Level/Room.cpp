@@ -3,6 +3,9 @@
 #include "StartRoom.h"
 #include <Actor/ChaserEnemy.h>
 #include <Actor/WandererEnemy.h>
+#include <Actor/OrbiterEnemy.h>
+#include <Actor/AStarEnemy.h>
+#include <Actor/ChargerEnemy.h>
 #include <Actor/Player.h>
 #include <Actor/HealItem.h>
 #include <Engine/Engine.h>
@@ -10,7 +13,6 @@
 #include <Util/Util.h>
 #include <Input/Input.h>
 #include <Actor/Obstacle.h>
-#include <Actor/AStarEnemy.h>
 #include <Windows.h>
 using namespace Craft;
 static bool showRoomGrid = false;
@@ -56,7 +58,9 @@ void Room::Tick(float deltaTime)
         return;
     }
     
+    //이동 불가능한 장애물 및 벽 표시 토글 키
     if (Input::Get().GetKeydown('G')) showRoomGrid = !showRoomGrid;
+    //A* 시각화 토글 키
     if (Input::Get().GetKeydown('P')) showPath = !showPath;
 
     //기본 클리어 플래그 false로 시작해서 플래그가 true로 바뀌면 리턴하여 판정 로직 반복안되게 하는 코드
@@ -71,7 +75,12 @@ void Room::Tick(float deltaTime)
     {
         int x = Util::RandomRange(1, Engine::Get().GetWidth() - 2);
         int y = Util::RandomRange(1, Engine::Get().GetHeight() - 2);
-        SpawnActor<HealItem>(Vector2(x, y));
+
+        if (!IsBlocked(x, y))
+        {
+            SpawnActor<HealItem>(Vector2(x, y));
+        }
+        
         healItemTimer.Reset();
     }
 
@@ -114,8 +123,10 @@ void Room::Draw()
     std::string fpsText = "fps : " + std::to_string(fps);
     Renderer::Get().Submit(fpsText, Vector2(1, Engine::Get().GetHeight() - 1), Color::White);
 
+    //A* 시각화 
     for (std::shared_ptr<Enemy> enemy : spawnedEnemyList)
     {
+        //AStarEnemy와 Player 경로 시각화
         std::shared_ptr<AStarEnemy> astarEnemy = Cast<AStarEnemy>(enemy);
         if (astarEnemy && astarEnemy->IsActive() && showPath)
         {
@@ -203,38 +214,17 @@ void Room::SpawnEnemies()
     {
         return;
     }
-    //보스룸일 경우 일반 room과 다른 패턴의 적 사용
-    else if (current == boss)
-    {
-        int wandererEnemyCount = Util::RandomRange(0, 2);
-
-        //Todo: boss방 적 스폰 및 패턴 설정, 지금 BossRoom은 따로 클래스를 만들어둬서 사용중이라 여기는 추후 미사용 시 제거
-        for (int i = 0; i < wandererEnemyCount; i++)
-        {
-            //Todo: 화면 가장자리 짤리는 현상 일어날 수 있어 확인 필요
-            int x = Util::RandomRange(1, Engine::Get().GetWidth() - 6);
-            int y = Util::RandomRange(1, Engine::Get().GetHeight() - 6);
-            //만약 적이 스폰될 위치가 obstacle의 위치라면 재추첨
-            if (IsBlocked(x, y)) { --i; continue; }
-
-            TrackSpawnedEnemy<WandererEnemy>(Vector2(x, y));
-        }
-    }
     else
     {
-        int chaserEnemyCount = Util::RandomRange(5, 7);
+        //Orbiter, Wanderer, AstarEnemy만 일반 룸에 소환, (보스룸에는 ChargeEnemy까지 소환)
+        int orbiterEnemyCount = Util::RandomRange(1, 2);
+        int wandererEnemyCount = Util::RandomRange(1, 2);
+        int AStarEnemyCount = Util::RandomRange(1, 2);
         
-        for (int i = 0; i < chaserEnemyCount; i++)
-        {
-            //Todo: 화면 가장자리 짤리는 현상 일어날 수 있어 확인 필요
-            int x = Util::RandomRange(1, Engine::Get().GetWidth() - 6);
-            int y = Util::RandomRange(1, Engine::Get().GetHeight() - 6);
-            //만약 적이 스폰될 위치가 obstacle의 위치라면 재추첨
-            if (IsBlocked(x, y)) { --i; continue; }
-            //Todo: 현재 테스트하려고 일반 Room에 AStarEnemy 스폰
-            TrackSpawnedEnemy<AStarEnemy>(Vector2(x, y));
-            
-        }
+        SpawnEnemyRandomly<OrbiterEnemy>(orbiterEnemyCount);
+        SpawnEnemyRandomly<WandererEnemy>(wandererEnemyCount);
+        SpawnEnemyRandomly<AStarEnemy>(AStarEnemyCount);
+        
     }
 }
 

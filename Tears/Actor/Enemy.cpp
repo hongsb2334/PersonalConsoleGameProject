@@ -2,6 +2,7 @@
 #include <Engine/Engine.h>
 #include <Level/Level.h>
 #include <Actor/Player.h>
+#include <Actor/Obstacle.h>
 #include <Actor/EnemyProjectile.h>
 #include <cmath>
 using namespace Craft;
@@ -23,6 +24,27 @@ void Enemy::Tick(float deltaTime)
         Fire();
         fireTimer.Reset();
     }
+}
+
+void Enemy::OnCollision(const std::shared_ptr<Actor>& other)
+{
+    super::OnCollision(other);
+    
+    //만약 발사체가 Obstacle에 닿으면 이전 위치로 업데이트
+    if (other->IsTypeOf<Obstacle>())
+    {
+        SetPosition(GetPreviousPosition());
+        xPosition = static_cast<float>(previousPosition.x);
+        yPosition = static_cast<float>(previousPosition.y);
+    }
+
+    ////적 안겹치게 처리하기 위해 이전 위치 업데이트
+    //if (other->IsTypeOf<Enemy>())
+    //{
+    //    SetPosition(GetPreviousPosition());
+    //    xPosition = static_cast<float>(previousPosition.x);
+    //    yPosition = static_cast<float>(previousPosition.y);
+    //}
 }
 
 void Enemy::Move(float deltaTime)

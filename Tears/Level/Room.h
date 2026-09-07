@@ -1,11 +1,16 @@
 ﻿#pragma once
+#include <Engine/Engine.h>
+#include <Util/Util.h>
 #include <Level/Level.h>
 #include <Actor/Enemy.h>
 #include <Actor/Door.h>
 #include <Actor/Obstacle.h>
 #include <Core/RunState.h>
 #include <Util/Timer.h>
+
+#include <stack>
 #include <cstdint>
+
 
 class Room : public Craft::Level
 {
@@ -71,6 +76,21 @@ protected:
         return obstacle;
     }
 
+    //랜덤 스폰하는 함수
+    template <typename T>
+    void SpawnEnemyRandomly(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            int x = Util::RandomRange(1, Craft::Engine::Get().GetWidth() - 6);
+            int y = Util::RandomRange(1, Craft::Engine::Get().GetHeight() - 6);
+            //만약 적이 스폰될 위치가 obstacle의 위치라면 재추첨
+            if (IsAreaBlocked(x, y, T::spawnWidth, 1)) { --i; continue; }
+            TrackSpawnedEnemy<T>(Craft::Vector2(x, y));
+        }
+        
+    }
+
     //방을 그리드로 만들기 (이동 가능하면 0, 불가능하면 1)
     void BuildRoomGrid();
 
@@ -80,12 +100,15 @@ protected:
     //Enemy의 수를 카운트하는 함수
     int CountAliveEnemies() const;
 
-    //플레이어 액터의 사이즈를 받아 
+    //플레이어 액터의 사이즈를 받아 플레이어가 다음 레벨에 넘어갈 시 스폰할 위치 리턴 
     Craft::Vector2 GetEntryPosition(EntryDirection direction, int playerWidth, int playerHeight) const;
 
 protected:
+    //적 리스트
     std::vector<std::shared_ptr<Enemy>> spawnedEnemyList;
+    //문 리스트
     std::vector<std::shared_ptr<Door>> doorList;
+    //장애물 리스트
     std::vector<std::shared_ptr<Obstacle>> obstacleList;
 
 

@@ -12,6 +12,9 @@ public:
 
 protected:
     virtual void Tick(float deltaTime) override;
+    
+    virtual void OnCollision(const std::shared_ptr<Actor>& other) override;
+
     //chaser 로직을 함수 따로 만들어서 그대로 옮기고
     //Move를 virtual이 아닌 공용 로직으로 만듬
     void Move(float deltaTime);

@@ -12,6 +12,8 @@ public:
     virtual void MovingPattern(float& outDx, float& outDy) const override;
     virtual void Tick(float deltaTime) override;
 
+    static constexpr int spawnWidth = 5;
+
 private:
     //유지하려는 거리
     float radius = 12.0f;

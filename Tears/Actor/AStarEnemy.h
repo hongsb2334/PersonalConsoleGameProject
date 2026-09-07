@@ -16,6 +16,7 @@ public:
 
     std::vector<Vector2> GetCurrentPath() const { return currentPath; }
 
+    static constexpr int spawnWidth = 5;
 private:
     //현재 이동중인 방향
     float currentDx = 0.0f;

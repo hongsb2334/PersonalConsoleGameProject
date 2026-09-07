@@ -4,6 +4,7 @@
 #include <Level/Level.h>
 #include <Level/GameOverLevel.h>
 #include <Actor/PlayerProjectile.h>
+#include <Actor/Obstacle.h>
 #include <cmath>
 
 
@@ -112,6 +113,14 @@ void Player::Tick(float deltaTime)
 void Player::OnCollision(const std::shared_ptr<Actor>& other)
 {
     super::OnCollision(other);
+
+    //만약 발사체가 Obstacle에 닿으면 이전 위치로 업데이트
+    if (other->IsTypeOf<Obstacle>())
+    {
+        SetPosition(GetPreviousPosition());
+        xPosition = static_cast<float>(previousPosition.x);
+        yPosition = static_cast<float>(previousPosition.y);
+    }
 }
 
 

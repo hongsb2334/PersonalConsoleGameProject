@@ -9,7 +9,7 @@ OrbiterEnemy::OrbiterEnemy(const Craft::Vector2& position, int maxHp, int damage
 {
     ChangeImage("Orbit");
     //Todo: 색깔도 바꾸는 로직 추가
-
+    color = Color::Blue;
    
 }
 

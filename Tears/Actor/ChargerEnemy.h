@@ -22,7 +22,7 @@ public:
         Dash
     };
 
-
+    static constexpr int spawnWidth = 7;
 
 private:
     Timer timer;
@@ -45,6 +45,7 @@ private:
     float dashTime = 0.6f;
     float dashMultiplier = 3.5f;
 
+    
     
 
 };

@@ -8,6 +8,7 @@ using namespace Craft;
 AStarEnemy::AStarEnemy(const Craft::Vector2& position, int maxHp, int damage) : Enemy(position, maxHp, damage)
 {
     ChangeImage("AStar");
+    color = Color::BrightWhite;
 }
 
 void AStarEnemy::MovingPattern(float& outDx, float& outDy) const
