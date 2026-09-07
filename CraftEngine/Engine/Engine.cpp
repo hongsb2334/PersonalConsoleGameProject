@@ -216,6 +216,7 @@ namespace Craft
 	}
 	void Engine::Tick(float deltaTime)
 	{
+        lastDeltaTime = deltaTime;
 		if (!mainLevel)
 		{
 			return;

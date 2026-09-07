@@ -2,6 +2,7 @@
 #include <Engine/Engine.h>
 #include <Actor/Player.h>
 #include <Actor/Damageable.h>
+#include <Actor/Obstacle.h>
 
 using namespace Craft;
 
@@ -38,6 +39,12 @@ void EnemyProjectile::OnCollision(const std::shared_ptr<Craft::Actor>& other)
     {
         Engine::Get().PlayOneShot("Explosion.wav");
         Cast<Damageable>(other)->TakeDamage(damage);
+        Destroy();
+    }
+
+    //만약 발사체가 Obstacle에 닿으면 데미지를 주고 소멸
+    if (other->IsTypeOf<Obstacle>())
+    {
         Destroy();
     }
 }

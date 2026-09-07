@@ -87,6 +87,9 @@ namespace Craft
 		inline int GetWidth() const { return setting.width; }
 		inline int GetHeight() const { return setting.height; }
 
+        //델타타임 getter
+        inline float GetDeltaTime() const { return lastDeltaTime; }
+
 
 	protected:
 		// 입력 처리 함수(입력 폴링)
@@ -124,6 +127,9 @@ namespace Craft
 
 		//엔진 설정 함수
 		Setting setting;
+
+        //프레임 표시를 위한 멤버
+        float lastDeltaTime = 0.0f;
 
 		//전역 접근이 가능하도록 변수 선언
 		static Engine* instance;		//클래스 내부에 static을 쓰면 모든 Engine 인스턴스가 공유하고 접근할 수 있다.

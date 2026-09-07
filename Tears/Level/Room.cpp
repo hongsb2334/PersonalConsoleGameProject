@@ -10,9 +10,11 @@
 #include <Util/Util.h>
 #include <Input/Input.h>
 #include <Actor/Obstacle.h>
+#include <Actor/AStarEnemy.h>
 #include <Windows.h>
 using namespace Craft;
 static bool showRoomGrid = false;
+static bool showPath = false;
 
 void Room::OnInitialized()
 {
@@ -55,6 +57,7 @@ void Room::Tick(float deltaTime)
     }
     
     if (Input::Get().GetKeydown('G')) showRoomGrid = !showRoomGrid;
+    if (Input::Get().GetKeydown('P')) showPath = !showPath;
 
     //기본 클리어 플래그 false로 시작해서 플래그가 true로 바뀌면 리턴하여 판정 로직 반복안되게 하는 코드
     if (node->isCleared)
@@ -104,6 +107,21 @@ void Room::Draw()
     {
         std::string hpText = "HP : " + std::to_string(player->GetHp()) + " / " + std::to_string(player->GetMaxHp());
         Renderer::Get().Submit(hpText, Vector2(1, 0), Color::White);
+    }
+
+    float fps = 1.0f / Engine::Get().GetDeltaTime();
+
+    std::string fpsText = "fps : " + std::to_string(fps);
+    Renderer::Get().Submit(fpsText, Vector2(1, Engine::Get().GetHeight() - 1), Color::White);
+
+    for (std::shared_ptr<Enemy> enemy : spawnedEnemyList)
+    {
+        std::shared_ptr<AStarEnemy> astarEnemy = Cast<AStarEnemy>(enemy);
+        if (astarEnemy && astarEnemy->IsActive() && showPath)
+        {
+            for(Craft::Vector2& position : astarEnemy->GetCurrentPath())
+            Renderer::Get().Submit(std::string("#"), position, Color::Green);
+        }
     }
 }
 
@@ -190,13 +208,13 @@ void Room::SpawnEnemies()
     {
         int wandererEnemyCount = Util::RandomRange(0, 2);
 
-        //Todo: boss방 적 스폰 및 패턴 설정
+        //Todo: boss방 적 스폰 및 패턴 설정, 지금 BossRoom은 따로 클래스를 만들어둬서 사용중이라 여기는 추후 미사용 시 제거
         for (int i = 0; i < wandererEnemyCount; i++)
         {
             //Todo: 화면 가장자리 짤리는 현상 일어날 수 있어 확인 필요
             int x = Util::RandomRange(1, Engine::Get().GetWidth() - 6);
             int y = Util::RandomRange(1, Engine::Get().GetHeight() - 6);
-            //만약 적이 스폰될 위치가 
+            //만약 적이 스폰될 위치가 obstacle의 위치라면 재추첨
             if (IsBlocked(x, y)) { --i; continue; }
 
             TrackSpawnedEnemy<WandererEnemy>(Vector2(x, y));
@@ -204,7 +222,7 @@ void Room::SpawnEnemies()
     }
     else
     {
-        int chaserEnemyCount = Util::RandomRange(3, 7);
+        int chaserEnemyCount = Util::RandomRange(5, 7);
         
         for (int i = 0; i < chaserEnemyCount; i++)
         {
@@ -213,7 +231,8 @@ void Room::SpawnEnemies()
             int y = Util::RandomRange(1, Engine::Get().GetHeight() - 6);
             //만약 적이 스폰될 위치가 obstacle의 위치라면 재추첨
             if (IsBlocked(x, y)) { --i; continue; }
-            TrackSpawnedEnemy<ChaserEnemy>(Vector2(x, y));
+            //Todo: 현재 테스트하려고 일반 Room에 AStarEnemy 스폰
+            TrackSpawnedEnemy<AStarEnemy>(Vector2(x, y));
             
         }
     }
@@ -249,7 +268,7 @@ void Room::SpawnObstacles()
     }
 
    
-
+    //방이 생성될 때마다 시드 멤버를 가지게 해서 장애물이 설치되는 위치와 갯수 설정. 이렇게 하면 방의 장애물의 위치와 갯수가 유지되어 다른 방에 갔다가 재입장해도 그대로 남아있다.
     std::mt19937 rng(current->roomSeed);
 
     auto randRange = [&rng](int low, int high)
@@ -276,9 +295,6 @@ void Room::SpawnObstacles()
 
         TrackSpawnedObstacle<Obstacle>(Vector2(ox, oy), tileW, tileH);
     }
-
-    
-
 }
 
 void Room::OnRoomCleared()
@@ -342,6 +358,18 @@ bool Room::IsBlocked(int x, int y) const
         return true;
     }
     return roomGrid[(Index(x, y))] != 0;
+}
+
+bool Room::IsAreaBlocked(int x, int y, int width, int height) const
+{
+    for (int i = x; i < x + width; i++)
+    {
+        if (IsBlocked(i, y))
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 int Room::CountAliveEnemies() const

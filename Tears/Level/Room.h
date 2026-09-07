@@ -26,6 +26,7 @@ public:
 
     bool IsBlocked(int x, int y) const;
 
+    bool IsAreaBlocked(int x, int y, int width, int height) const;
 protected:
     //문 스폰하는 함수, 기존 Room3, Room4 등에서 사용하던 로직 통합 구현
     virtual void SpawnDoor();

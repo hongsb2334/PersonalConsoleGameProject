@@ -9,8 +9,8 @@
 
 using namespace Craft;
 
-
-Player::Player(int initialHp) : Damageable("ISSAC", Vector2::Zero, Color::Cyan, 10, initialHp), fireMode(FireMode::OneShot)
+//Todo: 테스트 후 원래 체력 값 돌려놓기
+Player::Player(int initialHp) : Damageable("ISSAC", Vector2::Zero, Color::Cyan, 100000, initialHp), fireMode(FireMode::OneShot)
 {
     //생성 위치 설정
     int x = (Engine::Get().GetWidth() / 2) - (width / 2);

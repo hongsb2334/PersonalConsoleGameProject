@@ -89,6 +89,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Actor\AStarEnemy.h" />
     <ClInclude Include="Actor\Boss.h" />
     <ClInclude Include="Actor\ChargerEnemy.h" />
     <ClInclude Include="Actor\ChaserEnemy.h" />
@@ -117,6 +118,7 @@
     <ClInclude Include="Util\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Actor\AStarEnemy.cpp" />
     <ClCompile Include="Actor\Boss.cpp" />
     <ClCompile Include="Actor\ChargerEnemy.cpp" />
     <ClCompile Include="Actor\ChaserEnemy.cpp" />
