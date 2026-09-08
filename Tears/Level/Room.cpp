@@ -17,8 +17,13 @@
 #include <Windows.h>
 #include <algorithm>
 using namespace Craft;
+//토글로 설정한 것들
+//못가는 곳 보여주는 토글
 static bool showRoomGrid = false;
+//A* 경로 보여주는 토글
 static bool showPath = false;
+//fps on/off 토글
+static bool showFps = false;
 
 void Room::OnInitialized()
 {
@@ -64,6 +69,8 @@ void Room::Tick(float deltaTime)
     if (Input::Get().GetKeydown('G')) showRoomGrid = !showRoomGrid;
     //A* 시각화 토글 키
     if (Input::Get().GetKeydown('P')) showPath = !showPath;
+    //fps on/off 토글 키
+    if (Input::Get().GetKeydown('F')) showFps= !showFps;
 
     //기본 클리어 플래그 false로 시작해서 플래그가 true로 바뀌면 리턴하여 판정 로직 반복안되게 하는 코드
     if (node->isCleared)
@@ -123,7 +130,11 @@ void Room::Draw()
     float fps = 1.0f / Engine::Get().GetDeltaTime();
 
     std::string fpsText = "fps : " + std::to_string(fps);
-    Renderer::Get().Submit(fpsText, Vector2(1, Engine::Get().GetHeight() - 1), Color::White);
+    if (showFps)
+    {
+        Renderer::Get().Submit(fpsText, Vector2(1, Engine::Get().GetHeight() - 1), Color::White);
+    }
+    
 
     //A* 시각화 
     for (std::shared_ptr<Enemy> enemy : spawnedEnemyList)
@@ -387,10 +398,18 @@ void Room::DrawMiniMap()
     {
         //방 정보
         const RoomNode& node = pair.second;
+        //방이 있는데 완전히 생성된 방이 아니면
         if (!node.occupied)
         {
             continue;
         }
+
+        //안가본 방은 안그린다.
+        if (!node.isCleared && &node != currentRoom)
+        {
+            continue;
+        }
+
 
         Vector2 position = Vector2(originX + (node.coord.x - minX), originY + (node.coord.y - minY));
 
