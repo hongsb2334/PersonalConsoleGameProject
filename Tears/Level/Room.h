@@ -98,6 +98,7 @@ protected:
 
     inline int Index(int x, int y) const { return y * gridW + x; }
     
+    //미니맵 그리는 함수
     void DrawMiniMap();
 
 protected:

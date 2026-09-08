@@ -7,7 +7,7 @@ class OrbiterEnemy : public Enemy
 public:
     //선회형 적 (플레이어와 일정 거리를 유지하면서 원형으로 도는 적, 돌진 x)
     
-    OrbiterEnemy(const Craft::Vector2& position, int maxHp = 2, int damage = 2);
+    OrbiterEnemy(const Craft::Vector2& position, int maxHp = 2, int damage = 1);
 
     virtual void MovingPattern(float& outDx, float& outDy) const override;
     virtual void Tick(float deltaTime) override;

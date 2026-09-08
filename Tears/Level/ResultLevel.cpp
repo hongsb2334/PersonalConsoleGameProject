@@ -7,7 +7,7 @@
 
 using namespace Craft;
 
-ResultLevel::ResultLevel(const std::string& title, Craft::Color titleColor, const std::string& filename) : title(title), titleColor(titleColor)
+ResultLevel::ResultLevel(const std::vector<std::string>& title, Craft::Color titleColor, const std::string& filename) : title(title), titleColor(titleColor)
 {
     Engine::Get().StopBackGroundMusic();
     Engine::Get().PlayOneShot(filename);
@@ -40,10 +40,17 @@ void ResultLevel::Draw()
 {
     super::Draw();
 
-    int titleX = (Engine::Get().GetWidth() / 2) - (static_cast<int>(title.length()) / 2);
-    int titleY = (Engine::Get().GetHeight() / 2) - 2;
+    int titleX = (Engine::Get().GetWidth() / 2) - (static_cast<int>(title[0].length()) / 2);
+    int titleY = (Engine::Get().GetHeight() / 2) - 8;
 
-    Renderer::Get().Submit(title, Vector2(titleX, titleY), titleColor);
+    for (int i = 0; i < title.size(); i++)
+    {
+        for (int j = 0; j < title[0].size(); j++)
+        {
+            Renderer::Get().Submit(title[i], Vector2(titleX, titleY + i), titleColor);
+        }
+    }
+    
 
     for (int i = 0; i < menu->GetItemCount(); ++i)
     {
@@ -52,7 +59,7 @@ void ResultLevel::Draw()
 
         //선택된 항목은 초록색, 아니면 흰색으로 설정
         Color textColor = menu->IsSelected(i) ? Color::Green : Color::White;
-        Renderer::Get().Submit(label, Vector2(textX, titleY + 3 + i), textColor);
+        Renderer::Get().Submit(label, Vector2(textX, titleY + static_cast<int>(title.size() )+ 5 + i), textColor);
 
     }
 }

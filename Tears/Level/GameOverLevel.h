@@ -1,12 +1,25 @@
 ﻿#pragma once
 #include <Level/ResultLevel.h>
-
+#include <vector>
 class GameOverLevel : public ResultLevel
 {
     TYPE_DECLARATIONS(GameOverLevel, ResultLevel)
 
 public:
-    GameOverLevel() : ResultLevel("Game Over", Craft::Color::Red, "GameOver.wav") {}
+    GameOverLevel() : ResultLevel({
+    "  ######      ######    ##      ##  ##########          ######    ##      ##  ##########  ########    ",
+    "  ######      ######    ##      ##  ##########          ######    ##      ##  ##########  ########    ",
+    "##          ##      ##  ####  ####  ##                ##      ##  ##      ##  ##          ##      ##  ",
+    "##          ##      ##  ####  ####  ##                ##      ##  ##      ##  ##          ##      ##  ",
+    "##    ####  ##########  ##  ##  ##  ########          ##      ##  ##      ##  ########    ########    ",
+    "##    ####  ##########  ##  ##  ##  ########          ##      ##  ##      ##  ########    ########    ",
+    "##      ##  ##      ##  ##      ##  ##                ##      ##    ##  ##    ##          ##    ##    ",
+    "##      ##  ##      ##  ##      ##  ##                ##      ##    ##  ##    ##          ##    ##    ",
+    "  ######    ##      ##  ##      ##  ##########          ######        ##      ##########  ##      ##  ",
+    "  ######    ##      ##  ##      ##  ##########          ######        ##      ##########  ##      ##  ",
+        }, Craft::Color::Red, "GameOver.wav") {}
+
+    
 
 };
 

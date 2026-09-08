@@ -2,23 +2,41 @@
 #include <Engine/Engine.h>
 #include <Input/Input.h>
 #include <Level/StartRoom.h>
+#include <vector>
 using namespace Craft;
 void TitleLevel::OnInitialized()
 {
     super::OnInitialized();
 
-    std::string title = "Tears";
+    std::vector<std::string> title = {
+    "##########  ##########    ######    ########      ########  ",
+    "##########  ##########    ######    ########      ########  ",
+    "    ##      ##          ##      ##  ##      ##  ##          ",
+    "    ##      ##          ##      ##  ##      ##  ##          ",
+    "    ##      ########    ##########  ########      ######    ",
+    "    ##      ########    ##########  ########      ######    ",
+    "    ##      ##          ##      ##  ##    ##            ##  ",
+    "    ##      ##          ##      ##  ##    ##            ##  ",
+    "    ##      ##########  ##      ##  ##      ##  ########    ",
+    "    ##      ##########  ##      ##  ##      ##  ########    ",
+    };
     std::string gameStart = "Press Enter to start";
 
     //화면 너비의 절반에서 글자 길이의 절반만큼 왼쪽으로 이동
-    int titleX = (Engine::Get().GetWidth() / 2) - (static_cast<int>(title.length()) / 2);
-    int titleY = (Engine::Get().GetHeight() / 2) - 2;
+    int titleX = (Engine::Get().GetWidth() / 2) - (static_cast<int>(title[0].length()) / 2);
+    int titleY = (Engine::Get().GetHeight() / 2) - 8;
 
     int gameStartX = (Engine::Get().GetWidth() / 2) - (static_cast<int>(gameStart.length()) / 2);
     //title의 위치에서 아래로 3정도 밑에 위치
-    int gameStartY = titleY + 3;
-
-    SpawnActor<Actor>(title, Vector2(titleX, titleY), Color::Green);
+    int gameStartY = titleY + 15;
+    for (int i = 0; i < title.size(); i++)
+    {
+        for (int j = 0; j < title[0].size(); j++)
+        {
+            SpawnActor<Actor>(title[i], Vector2(titleX, titleY + i), Color::Green);
+        }
+    }
+    
     SpawnActor<Actor>(gameStart, Vector2(gameStartX, gameStartY), Color::White);
 
 }

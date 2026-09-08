@@ -17,8 +17,8 @@ void BossRoom::SpawnDoor()
 void BossRoom::SpawnEnemies()
 {
     int orbiterEnemyCount = Util::RandomRange(1, 3);
-    int wandererEnemyCount = Util::RandomRange(1, 3);
-    int AStarEnemyCount = Util::RandomRange(1, 3);
+    int wandererEnemyCount = Util::RandomRange(2, 3);
+    int AStarEnemyCount = Util::RandomRange(2, 3);
     int BossCount = 1;
 
     SpawnEnemyRandomly<OrbiterEnemy>(orbiterEnemyCount);

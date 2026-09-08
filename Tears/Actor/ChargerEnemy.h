@@ -5,7 +5,7 @@ class ChargerEnemy : public Enemy
     TYPE_DECLARATIONS(ChargerEnemy, Enemy)
 
 public:
-    ChargerEnemy(const Craft::Vector2& position, int maxHp = 2, int damage = 2);
+    ChargerEnemy(const Craft::Vector2& position, int maxHp = 2, int damage = 3);
 
     virtual void MovingPattern(float& outDx, float& outDy) const override;
     virtual void Tick(float deltaTime) override;

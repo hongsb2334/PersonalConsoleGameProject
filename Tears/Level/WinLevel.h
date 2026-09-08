@@ -6,6 +6,18 @@ class WinLevel : public ResultLevel
     TYPE_DECLARATIONS(WinLevel, ResultLevel)
 
 public:
-    WinLevel() : ResultLevel("You Win!", Craft::Color::Yellow, "Wingame.wav") {}
+    WinLevel() : ResultLevel({
+    "##      ##    ######    ##      ##        ##      ##  ######  ##      ##  ##  ",
+    "##      ##    ######    ##      ##        ##      ##  ######  ##      ##  ##  ",
+    "  ##  ##    ##      ##  ##      ##        ##      ##    ##    ####    ##  ##  ",
+    "  ##  ##    ##      ##  ##      ##        ##      ##    ##    ####    ##  ##  ",
+    "    ##      ##      ##  ##      ##        ##  ##  ##    ##    ##  ##  ##  ##  ",
+    "    ##      ##      ##  ##      ##        ##  ##  ##    ##    ##  ##  ##  ##  ",
+    "    ##      ##      ##  ##      ##        ####  ####    ##    ##    ####      ",
+    "    ##      ##      ##  ##      ##        ####  ####    ##    ##    ####      ",
+    "    ##        ######      ######          ##      ##  ######  ##      ##  ##  ",
+    "    ##        ######      ######          ##      ##  ######  ##      ##  ##  ",
+        }, Craft::Color::Yellow, "Wingame.wav") {}
 
+    
 };
