@@ -65,9 +65,14 @@ public:
     RoomNode* FindRoom(const GridCoord& coord);
     const std::vector<RoomNode*>& GetEndRoomList() const { return endRoomList; }
 
+    //던전 getter
+    const std::unordered_map<GridCoord, RoomNode, GridHash>& GetDungeon() const { return dungeon; }
+
     //시작방/보스방 꺼내는 함수
     RoomNode* GetStartRoom() const { return startRoom; }
     RoomNode* GetBossRoom() const { return bossRoom; }
+
+
 
 private:
     //방 생성 한번 시도 함수
@@ -81,6 +86,8 @@ private:
 
     //랜덤 방 방향 받아서 그에 맞는 좌표 offset 값 리턴하는 함수
     GridCoord GetOffset(EntryDirection entry);
+
+    
 
 private:
     //던전

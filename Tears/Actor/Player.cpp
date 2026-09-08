@@ -86,28 +86,28 @@ void Player::Tick(float deltaTime)
             Fire();
         }
     }
-    //연사 모드 처리
-    else if (fireMode == FireMode::Repeat)
-    {
-        if (Input::Get().GetKey(VK_SPACE))
-        {
-            //연사 발사 함수 호출
-            FireInterval();
-        }
-    }
+    ////연사 모드 처리
+    //else if (fireMode == FireMode::Repeat)
+    //{
+    //    if (Input::Get().GetKey(VK_SPACE))
+    //    {
+    //        //연사 발사 함수 호출
+    //        FireInterval();
+    //    }
+    //}
 
-    //발사 모드 전환 처리
-    if (Input::Get().GetKeydown('R'))
-    {
-        if (fireMode == FireMode::OneShot)
-        {
-            fireMode = FireMode::Repeat;
-        }
-        else if (fireMode == FireMode::Repeat)
-        {
-            fireMode = FireMode::OneShot;
-        }
-    }
+    ////발사 모드 전환 처리
+    //if (Input::Get().GetKeydown('R'))
+    //{
+    //    if (fireMode == FireMode::OneShot)
+    //    {
+    //        fireMode = FireMode::Repeat;
+    //    }
+    //    else if (fireMode == FireMode::Repeat)
+    //    {
+    //        fireMode = FireMode::OneShot;
+    //    }
+    //}
 }
 
 void Player::OnCollision(const std::shared_ptr<Actor>& other)
@@ -143,28 +143,28 @@ void Player::Move(float xDirection, float yDirection,float deltaTime)
     yPosition += yDirection * moveSpeed * deltaTime;
 
     //화면 왼쪽 벗어나지 않도록 처리
-    if (xPosition < 0)
+    if (xPosition < 1.0f)
     {
-        xPosition = 0.0f;
+        xPosition = 1.0f;
     }
 
     //화면 위 벗어나지 않도록 처리
-    if (yPosition < 0)
+    if (yPosition < 1.0f)
     {
-        yPosition = 0.0f;
+        yPosition = 1.0f;
     }
 
     //화면 오른쪽 벗어나지 않도록 처리
-    if (xPosition + width >= Engine::Get().GetWidth())
+    if (xPosition + width >= Engine::Get().GetWidth() - 1)
     {
-        xPosition = static_cast<float>(Engine::Get().GetWidth() - width);
+        xPosition = static_cast<float>(Engine::Get().GetWidth() - width - 1.0f);
     }
 
     //화면 아래 벗어나지 않도록 처리
     //Todo: 만약 상하좌우 끝에 문 설치후 닿으면 다음 방으로 넘어갈 시 여기에 문제 있을 수도 있음
-    if (yPosition + height >= Engine::Get().GetHeight())
+    if (yPosition + height >= Engine::Get().GetHeight() - 1)
     {
-        yPosition = static_cast<float>(Engine::Get().GetHeight() - height);
+        yPosition = static_cast<float>(Engine::Get().GetHeight() - height - 1.0f);
     }
 
     //위치 업데이트

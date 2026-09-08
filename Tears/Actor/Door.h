@@ -16,6 +16,7 @@ public:
     Door(const Craft::Vector2& position, std::function<void()> onEnter, DoorDirection doorDirection = DoorDirection::Horizontal);
     void Open();
 
+    void SetColor(Craft::Color setcolor) { color = setcolor; }
 protected:
     //적이 모두 처치되기 전에는 그려지지 않게 오버라이드
     virtual void Draw() override;

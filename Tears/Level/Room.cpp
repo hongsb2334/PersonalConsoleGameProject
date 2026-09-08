@@ -1,4 +1,5 @@
-﻿#include "Room.h"
+﻿#define NOMINMAX
+#include "Room.h"
 #include "BossRoom.h"
 #include "StartRoom.h"
 #include <Actor/ChaserEnemy.h>
@@ -14,6 +15,7 @@
 #include <Input/Input.h>
 #include <Actor/Obstacle.h>
 #include <Windows.h>
+#include <algorithm>
 using namespace Craft;
 static bool showRoomGrid = false;
 static bool showPath = false;
@@ -85,7 +87,7 @@ void Room::Tick(float deltaTime)
     }
 
 
-    if (CountAliveEnemies() == 0)
+    if (IsRoomCleared())
     {
         node->isCleared = true;
         OnRoomCleared();
@@ -134,6 +136,9 @@ void Room::Draw()
             Renderer::Get().Submit(std::string("#"), position, Color::Green);
         }
     }
+
+    //미니맵 그리기
+    DrawMiniMap();
 }
 
 void Room::SpawnDoor()
@@ -152,10 +157,10 @@ void Room::SpawnDoor()
     }
 
     //door 위치 설정
-    Vector2 topDoorPosition(Engine::Get().GetWidth() / 2 - (Door::doorLength / 2), 0);
-    Vector2 bottomDoorPosition(Engine::Get().GetWidth() / 2 - (Door::doorLength / 2), Engine::Get().GetHeight() - 1);
-    Vector2 rightDoorPosition(Engine::Get().GetWidth() - 1, Engine::Get().GetHeight() / 2 - (Door::doorLength / 2));
-    Vector2 leftDoorPosition(0, Engine::Get().GetHeight() / 2 - (Door::doorLength / 2));
+    Vector2 topDoorPosition(Engine::Get().GetWidth() / 2 - (Door::doorLength / 2), 1);
+    Vector2 bottomDoorPosition(Engine::Get().GetWidth() / 2 - (Door::doorLength / 2), Engine::Get().GetHeight() - 2);
+    Vector2 rightDoorPosition(Engine::Get().GetWidth() - 2, Engine::Get().GetHeight() / 2 - (Door::doorLength / 2));
+    Vector2 leftDoorPosition(1, Engine::Get().GetHeight() / 2 - (Door::doorLength / 2));
 
     std::vector<DoorInfo> doorInfo = {
         {EntryDirection::Top, current->topRoom, topDoorPosition, DoorDirection::Horizontal},
@@ -175,7 +180,7 @@ void Room::SpawnDoor()
         EntryDirection entry = info.entryDirection;
         RoomNode* neighbor = info.neighbor;
 
-        TrackSpawnedDoor<Door>(info.position, [runState, entry, neighbor, bossRoom, startRoom]()
+        std::shared_ptr<Door> door = TrackSpawnedDoor<Door>(info.position, [runState, entry, neighbor, bossRoom, startRoom]()
             {
                 runState->entryDirection = GetOppositeDirection(entry);
                 runState->currentRoom = neighbor;
@@ -197,6 +202,11 @@ void Room::SpawnDoor()
             },
             info.doorDirection
         );
+
+        if (info.neighbor == bossRoom)
+        {
+            door->SetColor(Color::Red);
+        }
 
     }    
     
@@ -340,6 +350,66 @@ void Room::BuildRoomGrid()
     }
 }
 
+void Room::DrawMiniMap()
+{
+    std::shared_ptr<RunState> runState = Engine::Get().GetGameInstance<RunState>();
+    //너무길어서 auto씀
+    const auto& dungeon = runState->dungeonMap.GetDungeon();
+    RoomNode* bossRoom = runState->dungeonMap.GetBossRoom();
+    RoomNode* currentRoom = runState->currentRoom;
+    
+    int minX = 0;
+    int maxX = 0;
+    int minY = 0;
+    int maxY = 0;
+    
+    for (const auto& pair : dungeon)
+    {
+        //방 정보
+        const RoomNode& node = pair.second;
+        if (!node.occupied)
+        {
+            continue;
+        }
+        
+        minX = std::min(minX, node.coord.x);
+        maxX = std::max(maxX, node.coord.x);
+
+        minY = std::min(minY, node.coord.y);
+        maxY = std::max(maxY, node.coord.y);
+    }
+    
+    int originX = Engine::Get().GetWidth() - (maxX - minX + 1) - 1;
+    int originY = 1;
+
+
+    for (const auto& pair : dungeon)
+    {
+        //방 정보
+        const RoomNode& node = pair.second;
+        if (!node.occupied)
+        {
+            continue;
+        }
+
+        Vector2 position = Vector2(originX + (node.coord.x - minX), originY + (node.coord.y - minY));
+
+        if (&node == currentRoom)
+        {
+            Renderer::Get().Submit("#", position, Color::Blue);
+        }
+        else if (&node == bossRoom)
+        {
+            Renderer::Get().Submit("#", position, Color::Red);
+        }
+        else if (node.isCleared)
+        {
+            Renderer::Get().Submit("#", position, Color::Green);
+        }
+        else Renderer::Get().Submit("#", position, Color::White);
+    }
+}
+
 bool Room::IsBlocked(int x, int y) const
 {
     //범위 밖 넘어가면 true 리턴, 아니면 실제 격자가 이동 불가능한지 여부 리턴
@@ -384,13 +454,13 @@ Vector2 Room::GetEntryPosition(EntryDirection direction, int playerWidth, int pl
     switch (direction)
     {
     case EntryDirection::Top:
-        return Vector2(Engine::Get().GetWidth() / 2 - halfWidth, 1);
+        return Vector2(Engine::Get().GetWidth() / 2 - halfWidth, 2);
     case EntryDirection::Bottom:
-        return Vector2(Engine::Get().GetWidth() / 2 - halfWidth, Engine::Get().GetHeight() - playerHeight - 1);
+        return Vector2(Engine::Get().GetWidth() / 2 - halfWidth, Engine::Get().GetHeight() - playerHeight - 2);
     case EntryDirection::Left:
-        return Vector2(1, Engine::Get().GetHeight() / 2 - halfHeight);
+        return Vector2(2, Engine::Get().GetHeight() / 2 - halfHeight);
     case EntryDirection::Right:
-        return Vector2(Engine::Get().GetWidth() - playerWidth - 1, Engine::Get().GetHeight() / 2 - halfHeight);
+        return Vector2(Engine::Get().GetWidth() - playerWidth - 2, Engine::Get().GetHeight() / 2 - halfHeight);
     case EntryDirection::None:
     default:
         //시작 방에서는 EntryDirection이 기본 None으로 설정되어 있어 default 까지 내려오게 설정, 이렇게 하면 시작 방에서 중앙에 스폰됨

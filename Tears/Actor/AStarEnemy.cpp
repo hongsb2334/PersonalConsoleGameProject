@@ -68,5 +68,27 @@ void AStarEnemy::Tick(float deltaTime)
         currentDy = 0.0f;
     }
 
+    ////Todo: 클램프 넣어주긴 했는데 AStar는 플레이어 뒤로 넘어가지 않아서 의미 없음.
+    ////x값이 0보다 작아지면 0으로 클램프 후 부호 바꿔서 반대로 진행하게 함
+    //if (xPosition < 1.0f)
+    //{
+    //    xPosition = 1.0f;
+    //}
+    ////x값과 가로 길이 더한게 창 넘어가면 창에서 글자 길이 빼서 클램프 해주고 방향 반대 설정
+    //if (xPosition + width > Engine::Get().GetWidth() - 1)
+    //{
+    //    xPosition = Engine::Get().GetWidth() - width - 1;
+    //}
+    ////x값과 마찬가지
+    //if (yPosition < 1.0f)
+    //{
+    //    yPosition = 1.0f;
+    //}
+    ////Todo: x값이랑 똑같은데 현재 height는 1이다, 나중에 2차원 액터 사용시 수정 필요
+    //if (yPosition + height > Engine::Get().GetHeight() - 1)
+    //{
+    //    yPosition = Engine::Get().GetHeight() - height - 1;
+    //}
+
 
 }

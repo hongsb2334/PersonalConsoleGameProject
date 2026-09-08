@@ -23,6 +23,8 @@ protected:
     virtual void Fire();
     virtual void OnDeath() override;
 
+    void Clamp();
+
     Timer fireTimer;
     float fireInterval = 1.0f;
     int damage = 1;

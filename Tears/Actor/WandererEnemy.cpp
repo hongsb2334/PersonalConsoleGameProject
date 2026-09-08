@@ -38,28 +38,28 @@ void WandererEnemy::Tick(float deltaTime)
         timer.Reset();
     }
 
-    //x값이 0보다 작아지면 0으로 클램프 후 부호 바꿔서 반대로 진행하게 함
-    if (xPosition < 0)
+    //x값이 0보다 작아지면 1로 클램프 후 부호 바꿔서 반대로 진행하게 함
+    if (xPosition < 1.0f)
     {
-        xPosition = 0;
+        xPosition = 1.0f;
         currentDx *= -1;
     }
-    //x값과 가로 길이 더한게 창 넘어가면 창에서 글자 길이 빼서 클램프 해주고 방향 반대 설정
-    if (xPosition + width > Engine::Get().GetWidth())
+    //x값과 가로 길이 더한게 창 -1 길이 넘어가면 창에서 글자 길이 빼서 클램프 해주고 방향 반대 설정
+    if (xPosition + width > Engine::Get().GetWidth() - 1)
     {
-        xPosition = Engine::Get().GetWidth() - width;
+        xPosition = Engine::Get().GetWidth() - width - 1;
         currentDx *= -1;
     }
     //x값과 마찬가지
-    if (yPosition < 0)
+    if (yPosition < 1.0f)
     {
-        yPosition = 0;
+        yPosition = 1.0f;
         currentDy *= -1;
     }
     //Todo: x값이랑 똑같은데 현재 height는 1이다, 나중에 2차원 액터 사용시 수정 필요
-    if (yPosition + height > Engine::Get().GetHeight())
+    if (yPosition + height > Engine::Get().GetHeight() - 1)
     {
-        yPosition = Engine::Get().GetHeight() - height;
+        yPosition = Engine::Get().GetHeight() - height - 1;
         currentDy *= -1;
     }
 

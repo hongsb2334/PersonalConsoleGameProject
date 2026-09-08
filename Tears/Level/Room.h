@@ -48,6 +48,8 @@ protected:
     //방 클리어시 호출(클리어 후 등록된 문 활성화)
     virtual void OnRoomCleared();
     
+    virtual bool IsRoomCleared() const { return CountAliveEnemies() == 0; }
+
     //Enemy를 스폰하고 추적하는 코드
     template <typename T, typename ...Args, typename = std::enable_if_t<std::is_base_of<Enemy, T>::value>>
     std::shared_ptr<T> TrackSpawnedEnemy(Args&& ...args)
@@ -96,6 +98,8 @@ protected:
 
     inline int Index(int x, int y) const { return y * gridW + x; }
     
+    void DrawMiniMap();
+
 protected:
     //Enemy의 수를 카운트하는 함수
     int CountAliveEnemies() const;

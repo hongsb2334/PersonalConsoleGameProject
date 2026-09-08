@@ -80,28 +80,28 @@ void ChargerEnemy::Tick(float deltaTime)
     //벽 클램프 처리를 위한 변수
     bool hitWall = false;
 
-    //x값이 0보다 작아지면 0으로 클램프
-    if (xPosition < 0)
+    //x값이 1보다 작아지면 1로 클램프
+    if (xPosition < 1.0f)
     {
-        xPosition = 0.0f;
+        xPosition = 1.0f;
         hitWall = true;
     }
     //x값과 가로 길이 더한게 창 넘어가면 창에서 글자 길이 빼서 클램프
-    if (xPosition + width > Engine::Get().GetWidth())
+    if (xPosition + width > Engine::Get().GetWidth() - 1)
     {
-        xPosition = Engine::Get().GetWidth() - width;
+        xPosition = Engine::Get().GetWidth() - width - 1;
         hitWall = true;
     }
     //x값과 마찬가지
-    if (yPosition < 0)
+    if (yPosition < 1.0f)
     {
-        yPosition = 0;
+        yPosition = 1.0f;
         hitWall = true;
     }
     //Todo: x값이랑 똑같은데 현재 height는 1이다, 나중에 2차원 액터 사용시 수정 필요
-    if (yPosition + height > Engine::Get().GetHeight())
+    if (yPosition + height > Engine::Get().GetHeight() - 1)
     {
-        yPosition = Engine::Get().GetHeight() - height;
+        yPosition = Engine::Get().GetHeight() - height - 1;
         hitWall = true;
     }
 

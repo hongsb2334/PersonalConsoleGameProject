@@ -25,12 +25,27 @@ void BossRoom::SpawnEnemies()
     SpawnEnemyRandomly<WandererEnemy>(wandererEnemyCount);
     SpawnEnemyRandomly<AStarEnemy>(AStarEnemyCount);
     SpawnEnemyRandomly<Boss>(BossCount);   
+
+    for (std::shared_ptr<Enemy> enemy : spawnedEnemyList)
+    {
+        if (std::shared_ptr<Boss> boss = Cast<Boss>(enemy))
+        {
+            bossRef = boss;
+            break;
+        }
+    }
 }
 
 void BossRoom::OnRoomCleared()
 {
     super::OnRoomCleared();
     Engine::Get().AddNewLevel<WinLevel>();
+}
+
+bool BossRoom::IsRoomCleared() const
+{
+    //잡몹이 남아있는 상태에서 보스가 먼저죽으면 게임 승리
+    return !bossRef || !bossRef->IsActive();
 }
 
 void BossRoom::Draw()

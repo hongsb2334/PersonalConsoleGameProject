@@ -71,26 +71,7 @@ void OrbiterEnemy::Tick(float deltaTime)
 {
     super::Tick(deltaTime);
 
-    //x값이 0보다 작아지면 0으로 클램프 후 부호 바꿔서 반대로 진행하게 함
-    if (xPosition < 0)
-    {
-        xPosition = 0.0f;
-    }
-    //x값과 가로 길이 더한게 창 넘어가면 창에서 글자 길이 빼서 클램프 해주고 방향 반대 설정
-    if (xPosition + width > Engine::Get().GetWidth())
-    {
-        xPosition = Engine::Get().GetWidth() - width;
-    }
-    //x값과 마찬가지
-    if (yPosition < 0)
-    {
-        yPosition = 0;
-    }
-    //Todo: x값이랑 똑같은데 현재 height는 1이다, 나중에 2차원 액터 사용시 수정 필요
-    if (yPosition + height > Engine::Get().GetHeight())
-    {
-        yPosition = Engine::Get().GetHeight() - height;
-    }
+    Clamp();
     
     //Todo: 클램프 직후 xPosition과 액터의 실제 위치가 한프레임 어긋나 있음(실제로 눈에 안보임). 나중에 문제 생기면 이 코드 활성화  
     //Vector2 clamp = GetPosition();
