@@ -130,7 +130,7 @@ void ChargerEnemy::OnCollision(const std::shared_ptr<Craft::Actor>& other)
 
     if (auto player = Cast<Player>(other))
     {
-        player->TakeDamage(2);
+        player->TakeDamage(damage);
         hitCoolDown.SetTargetTime(0.5f);
         hitCoolDown.Reset();
     }

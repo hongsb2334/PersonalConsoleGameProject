@@ -2,7 +2,7 @@
 #include <Engine/Engine.h>
 #include <Level/Level.h>
 #include <Util/Util.h>
-#include "Player.h"
+#include <Actor/Player.h>
 
 using namespace Craft;
 OrbiterEnemy::OrbiterEnemy(const Craft::Vector2& position, int maxHp, int damage) : Enemy(position, maxHp, damage)

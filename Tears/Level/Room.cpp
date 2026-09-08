@@ -2,11 +2,11 @@
 #include "Room.h"
 #include "BossRoom.h"
 #include "StartRoom.h"
-#include <Actor/ChaserEnemy.h>
-#include <Actor/WandererEnemy.h>
-#include <Actor/OrbiterEnemy.h>
-#include <Actor/AStarEnemy.h>
-#include <Actor/ChargerEnemy.h>
+#include <Actor/Enemy/ChaserEnemy.h>
+#include <Actor/Enemy/WandererEnemy.h>
+#include <Actor/Enemy/OrbiterEnemy.h>
+#include <Actor/Enemy/AStarEnemy.h>
+#include <Actor/Enemy/ChargerEnemy.h>
 #include <Actor/Player.h>
 #include <Actor/HealItem.h>
 #include <Engine/Engine.h>
@@ -24,6 +24,8 @@ static bool showRoomGrid = false;
 static bool showPath = false;
 //fps on/off 토글
 static bool showFps = false;
+//맵 전체 보여주기 on/off 토글
+static bool showMap = false;
 
 void Room::OnInitialized()
 {
@@ -71,6 +73,9 @@ void Room::Tick(float deltaTime)
     if (Input::Get().GetKeydown('P')) showPath = !showPath;
     //fps on/off 토글 키
     if (Input::Get().GetKeydown('F')) showFps= !showFps;
+    //맵 on/off 토글 키
+    if (Input::Get().GetKeydown('M')) showMap = !showMap;
+
 
     //기본 클리어 플래그 false로 시작해서 플래그가 true로 바뀌면 리턴하여 판정 로직 반복안되게 하는 코드
     if (node->isCleared)
@@ -405,7 +410,7 @@ void Room::DrawMiniMap()
         }
 
         //안가본 방은 안그린다.
-        if (!node.isCleared && &node != currentRoom)
+        if (!node.isCleared && &node != currentRoom && !showMap)
         {
             continue;
         }

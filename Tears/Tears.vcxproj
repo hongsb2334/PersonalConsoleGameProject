@@ -89,20 +89,20 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Actor\AStarEnemy.h" />
-    <ClInclude Include="Actor\Boss.h" />
-    <ClInclude Include="Actor\ChargerEnemy.h" />
-    <ClInclude Include="Actor\ChaserEnemy.h" />
+    <ClInclude Include="Actor\Enemy\AStarEnemy.h" />
+    <ClInclude Include="Actor\Enemy\Boss.h" />
+    <ClInclude Include="Actor\Enemy\ChargerEnemy.h" />
+    <ClInclude Include="Actor\Enemy\ChaserEnemy.h" />
     <ClInclude Include="Actor\Damageable.h" />
     <ClInclude Include="Actor\Door.h" />
-    <ClInclude Include="Actor\Enemy.h" />
+    <ClInclude Include="Actor\Enemy\Enemy.h" />
     <ClInclude Include="Actor\EnemyProjectile.h" />
     <ClInclude Include="Actor\HealItem.h" />
     <ClInclude Include="Actor\Obstacle.h" />
-    <ClInclude Include="Actor\OrbiterEnemy.h" />
+    <ClInclude Include="Actor\Enemy\OrbiterEnemy.h" />
     <ClInclude Include="Actor\Player.h" />
     <ClInclude Include="Actor\PlayerProjectile.h" />
-    <ClInclude Include="Actor\WandererEnemy.h" />
+    <ClInclude Include="Actor\Enemy\WandererEnemy.h" />
     <ClInclude Include="AStar\AStar.h" />
     <ClInclude Include="Core\Dungeon.h" />
     <ClInclude Include="Core\EntryDirection.h" />
@@ -118,19 +118,19 @@
     <ClInclude Include="Util\Timer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Actor\AStarEnemy.cpp" />
-    <ClCompile Include="Actor\Boss.cpp" />
-    <ClCompile Include="Actor\ChargerEnemy.cpp" />
-    <ClCompile Include="Actor\ChaserEnemy.cpp" />
+    <ClCompile Include="Actor\Enemy\AStarEnemy.cpp" />
+    <ClCompile Include="Actor\Enemy\Boss.cpp" />
+    <ClCompile Include="Actor\Enemy\ChargerEnemy.cpp" />
+    <ClCompile Include="Actor\Enemy\ChaserEnemy.cpp" />
     <ClCompile Include="Actor\Damageable.cpp" />
     <ClCompile Include="Actor\Door.cpp" />
-    <ClCompile Include="Actor\Enemy.cpp" />
+    <ClCompile Include="Actor\Enemy\Enemy.cpp" />
     <ClCompile Include="Actor\EnemyProjectile.cpp" />
     <ClCompile Include="Actor\HealItem.cpp" />
     <ClCompile Include="Actor\Obstacle.cpp" />
-    <ClCompile Include="Actor\OrbiterEnemy.cpp" />
+    <ClCompile Include="Actor\Enemy\OrbiterEnemy.cpp" />
     <ClCompile Include="Actor\PlayerProjectile.cpp" />
-    <ClCompile Include="Actor\WandererEnemy.cpp" />
+    <ClCompile Include="Actor\Enemy\WandererEnemy.cpp" />
     <ClCompile Include="AStar\AStar.cpp" />
     <ClCompile Include="Core\Dungeon.cpp" />
     <ClCompile Include="Level\BossRoom.cpp" />

@@ -2,11 +2,11 @@
 #include <Engine/Engine.h>
 #include <Util/Util.h>
 #include <Level/WinLevel.h>
-#include <Actor/Boss.h>
-#include <Actor/WandererEnemy.h>
-#include <Actor/OrbiterEnemy.h>
-#include <Actor/ChargerEnemy.h>
-#include <Actor/AStarEnemy.h>
+#include <Actor/Enemy/Boss.h>
+#include <Actor/Enemy/WandererEnemy.h>
+#include <Actor/Enemy/OrbiterEnemy.h>
+#include <Actor/Enemy/ChargerEnemy.h>
+#include <Actor/Enemy/AStarEnemy.h>
 #include <Render/Renderer.h>
 using namespace Craft;
 

@@ -27,7 +27,7 @@
     <ClInclude Include="Actor\Damageable.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Actor\Enemy.h">
+    <ClInclude Include="Actor\Enemy\Enemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Actor\EnemyProjectile.h">
@@ -63,7 +63,7 @@
     <ClInclude Include="Level\WinLevel.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Actor\Boss.h">
+    <ClInclude Include="Actor\Enemy\Boss.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Actor\HealItem.h">
@@ -75,16 +75,16 @@
     <ClInclude Include="Core\Dungeon.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Actor\ChaserEnemy.h">
+    <ClInclude Include="Actor\Enemy\ChaserEnemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Actor\WandererEnemy.h">
+    <ClInclude Include="Actor\Enemy\WandererEnemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Actor\OrbiterEnemy.h">
+    <ClInclude Include="Actor\Enemy\OrbiterEnemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Actor\ChargerEnemy.h">
+    <ClInclude Include="Actor\Enemy\ChargerEnemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Actor\Obstacle.h">
@@ -93,7 +93,7 @@
     <ClInclude Include="AStar\AStar.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Actor\AStarEnemy.h">
+    <ClInclude Include="Actor\Enemy\AStarEnemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -113,7 +113,7 @@
     <ClCompile Include="Actor\Damageable.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Actor\Enemy.cpp">
+    <ClCompile Include="Actor\Enemy\Enemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Actor\EnemyProjectile.cpp">
@@ -140,7 +140,7 @@
     <ClCompile Include="Level\ResultLevel.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Actor\Boss.cpp">
+    <ClCompile Include="Actor\Enemy\Boss.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Actor\HealItem.cpp">
@@ -149,16 +149,16 @@
     <ClCompile Include="Core\Dungeon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Actor\ChaserEnemy.cpp">
+    <ClCompile Include="Actor\Enemy\ChaserEnemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Actor\WandererEnemy.cpp">
+    <ClCompile Include="Actor\Enemy\WandererEnemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Actor\OrbiterEnemy.cpp">
+    <ClCompile Include="Actor\Enemy\OrbiterEnemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Actor\ChargerEnemy.cpp">
+    <ClCompile Include="Actor\Enemy\ChargerEnemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Actor\Obstacle.cpp">
@@ -167,7 +167,7 @@
     <ClCompile Include="AStar\AStar.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Actor\AStarEnemy.cpp">
+    <ClCompile Include="Actor\Enemy\AStarEnemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

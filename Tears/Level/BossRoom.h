@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <Level/Room.h>
-#include <Actor/Boss.h>
+#include <Actor/Enemy/Boss.h>
 class BossRoom : public Room
 {
     TYPE_DECLARATIONS(BossRoom, Room)

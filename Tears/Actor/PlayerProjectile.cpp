@@ -1,7 +1,7 @@
 ﻿#include "PlayerProjectile.h"
 #include <Engine/Engine.h>
 #include <Input/Input.h>
-#include <Actor/Enemy.h>
+#include <Actor/Enemy/Enemy.h>
 #include <Actor/Obstacle.h>
 #include <cmath>
 using namespace Craft;

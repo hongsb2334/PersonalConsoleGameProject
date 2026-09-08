@@ -2,7 +2,7 @@
 #include <Engine/Engine.h>
 #include <Util/Util.h>
 #include <Level/Level.h>
-#include <Actor/Enemy.h>
+#include <Actor/Enemy/Enemy.h>
 #include <Actor/Door.h>
 #include <Actor/Obstacle.h>
 #include <Core/RunState.h>
