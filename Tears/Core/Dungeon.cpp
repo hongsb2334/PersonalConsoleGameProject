@@ -7,7 +7,7 @@ bool DungeonMap::GenerateRoom(int roomNum, int maxRegenerateNum)
     //maxReGenerateNum 수만큼 방 생성
     for (int i = 0; i < maxRegenerateNum; ++i)
     {
-        //만약 성공적으로 
+        //만약 성공적으로 생성 시
         if (GenerateRoomOnce(roomNum))
         {
             return true;
@@ -110,7 +110,7 @@ bool DungeonMap::GenerateRoomOnce(int roomNum)
             if (newRoom.occupied)
             {
                 continue;
-            }
+            }   
             else
             {
                 //새로 생긴 노드는 위치가 (0, 0)으로 초기화되기 때문에 직접 넣어줘야 함.
@@ -125,7 +125,7 @@ bool DungeonMap::GenerateRoomOnce(int roomNum)
             {
                 continue;
             }
-
+                
             //여기까지 통과했으면 방 생성
             newRoom.occupied = true;
             newRoom.distance = current->distance + 1;
@@ -156,7 +156,7 @@ bool DungeonMap::GenerateRoomOnce(int roomNum)
         return false;
     }
 
-    //끝 방 리스트의 마지막 항복을 bossRoom으로 지정
+    //끝 방 리스트의 마지막 항목을 bossRoom으로 지정
     bossRoom = endRoomList.back();
     return true;
 }

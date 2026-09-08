@@ -35,7 +35,9 @@ void AStarEnemy::Tick(float deltaTime)
     int enemyWidth = GetWidth();
 
     //성공 시 path[0] = AStarEnemy의 위치, path[1] = 다음 위치
-    std::vector<Vector2> path = astar.FindPath(GetPosition(), player->GetPosition(), Engine::Get().GetWidth(), Engine::Get().GetHeight(), [room, enemyWidth](int x, int y) {
+    currentPath = astar.FindPath(GetPosition(), player->GetPosition(), 
+        Engine::Get().GetWidth(), Engine::Get().GetHeight(), [room, enemyWidth](int x, int y) 
+        {
         for (int i = x; i < x + enemyWidth; i++)
         {
             if (room->IsBlocked(i, y))
@@ -46,14 +48,14 @@ void AStarEnemy::Tick(float deltaTime)
         return false;
         });
 
-    //path는 지역변수라 Tick 한번 돌면 사라지므로 멤버에 currentPath에 저장해둠
-    currentPath = path;
+    
+    
 
-    //path 사이즈가 2여야 path[0]과 path[1]이 모두 보장됨. 처음에 !path.empty()로 했었는데 이러면 path[0]이나 path[1]일때도 통과하기 때문에 안됨
-    if (path.size() >=2)
+    //currentPath 사이즈가 2여야 currentPath[0]과 currentPath[1]이 모두 보장됨. 처음에 !path.empty()로 했었는데 이러면 currentPath[0]이나 currentPath[1]일때도 통과하기 때문에 안됨
+    if (currentPath.size() >=2)
     {
-        currentDx = path[1].x - path[0].x;
-        currentDy = path[1].y - path[0].y;
+        currentDx = currentPath[1].x - currentPath[0].x;
+        currentDy = currentPath[1].y - currentPath[0].y;
 
         float length = std::sqrt(currentDx * currentDx + currentDy * currentDy);
         if (length > 0.0f)

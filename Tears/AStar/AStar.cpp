@@ -69,6 +69,7 @@ std::vector<Vector2> AStar::FindPath(const Vector2& startPosition, const Vector2
         {1, -1, diagonalCost}, //우상단
         {-1, 1, diagonalCost}, //좌하단
         {1, 1, diagonalCost}, //우하단
+        //{x, y, cost}
     };
 
     //openList가 빌 때 까지탐색 반복

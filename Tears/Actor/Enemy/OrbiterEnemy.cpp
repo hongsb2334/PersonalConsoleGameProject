@@ -34,7 +34,9 @@ void OrbiterEnemy::MovingPattern(float& outDx, float& outDy) const
     outDx = static_cast<float>(player->GetPosition().x - GetPosition().x);
     outDy = static_cast<float>(player->GetPosition().y - GetPosition().y);
 
+    //OrbiterEnemy에서 Player까지의 길이
     float length = std::sqrt(outDx * outDx + outDy * outDy);
+
     if (length <= 0)
     {
         //플레이어와의 거리가 0이면 이동 안함

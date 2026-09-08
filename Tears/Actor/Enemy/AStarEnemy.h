@@ -28,8 +28,5 @@ private:
     AStar astar;
     //경로를 저장할 멤버 선언
     std::vector<Vector2> currentPath;
-
-
-
 };
 
