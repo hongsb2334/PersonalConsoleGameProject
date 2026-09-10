@@ -246,7 +246,7 @@ void Room::SpawnEnemies()
         //Orbiter, Wanderer, AstarEnemy만 일반 룸에 소환, (보스룸에는 ChargeEnemy까지 소환)
         int orbiterEnemyCount = Util::RandomRange(1, 2);
         int wandererEnemyCount = Util::RandomRange(1, 2);
-        int AStarEnemyCount = Util::RandomRange(1, 2);
+        int AStarEnemyCount = Util::RandomRange(1, 3);
         
         SpawnEnemyRandomly<OrbiterEnemy>(orbiterEnemyCount);
         SpawnEnemyRandomly<WandererEnemy>(wandererEnemyCount);
